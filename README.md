@@ -47,7 +47,7 @@ country           : Geographical country location linked to the user profile.
 ```
 
 ------------------------------------------------------------------------------
-Table: dim_post
+Table: dim_post  
 Purpose: Stores metadata, media attributes, and structural characteristics of published content.
 ------------------------------------------------------------------------------
 ```text
@@ -61,7 +61,7 @@ has_audio         : Indicator showing whether the post contains an active audio 
 ```
 
 ------------------------------------------------------------------------------
-Table: dim_hashtag
+Table: dim_hashtag  
 Purpose: Stores unique hashtags and tags used across content on the platform.
 ------------------------------------------------------------------------------
 ```text
@@ -70,12 +70,13 @@ hashtag_key       : Warehouse-managed surrogate key uniquely identifying each ta
 hashtag_text      : The actual string value of the hashtag without special characters (e.g., photography, travel).
 ```
 
+------------------------------------------------------------------------------
 
 FACT TABLES (Events & Metrics)
 
 ------------------------------------------------------------------------------
 
-Table: fact_post_creation
+Table: fact_post_creation  
 Purpose: Captures content publishing events, linking content creators to their posts and creation dates.
 
 ------------------------------------------------------------------------------
@@ -89,7 +90,7 @@ post_count        : Additive metric (default value of 1) used to sum the total v
 
 ------------------------------------------------------------------------------
 
-Table: fact_engagement
+Table: fact_engagement  
 Purpose: Captures individual user interactions (likes, comments, shares) made on published content.
 
 ------------------------------------------------------------------------------
@@ -104,7 +105,7 @@ interaction_count : Additive metric (default value of 1) used to sum total inter
 
 ------------------------------------------------------------------------------
 
-Table: fact_network
+Table: fact_network  
 Purpose: Captures relationship changes (follows and unfollows) between users to track network growth over time.
 
 ------------------------------------------------------------------------------
@@ -119,7 +120,7 @@ is_active_follow  : Numeric status flag (1 for active follow, 0 for unfollowed) 
 
 ------------------------------------------------------------------------------
 
-Table: fact_hashtag_usage
+Table: fact_hashtag_usage  
 Purpose: Connects posts directly to the individual hashtags applied to them for topic and trend analysis.
 
 ------------------------------------------------------------------------------
@@ -131,6 +132,7 @@ usage_date_key    : References the date dimension record for when the tag was po
 usage_count       : Additive metric (default value of 1) used to calculate total usage frequency per hashtag.
 ```
 
+------------------------------------------------------------------------------
 
 SOCIAL MEDIA ANALYTICS SCHEMA (MYSQL VERSION)
 
@@ -411,9 +413,9 @@ SOCIAL MEDIA ANALYTICS EXPLORATORY DATA ANALYSIS
 
 ------------------------------------------------------------------------------
 
-Database: MySQL 8.0
-Purpose: Business-focused exploratory analysis for decision-making
-Portfolio Project: Data Analyst
+Database: MySQL 8.0  
+Purpose: Business-focused exploratory analysis for decision-making  
+Portfolio Project: Data Analyst  
 Note: All user-level references use the non-identifying surrogate key (user_id) from dim_user. No usernames or other personally identifiable information are queried or displayed.
 
 ------------------------------------------------------------------------------
