@@ -466,7 +466,9 @@ INSIGHTS:
 
 2. EXECUTIVE FINDING: VIDEO CATEGORY ALIGNMENT & REPORTING SIMPLIFICATION
    Observation: Video inventory is split between legacy Video (9.45%, n=567) and Reel (29.68%, n=1,781), despite both displaying identical 100% audio usage rates.
+
    Explanation: Maintaining duplicate video categories creates inconsistencies in executive performance dashboards, distorts content trend analysis, and increases administrative reporting overhead.
+
    Recommendation: Operations and Business Analytics should standardize content definitions to consolidate legacy Video under the Reel classification.
 
 -----------------------------------------------------------------------------
@@ -519,37 +521,27 @@ ORDER BY
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: MID-YEAR PUBLISHING VELOCITY PEAK (Q2/Q3)
---    Observation: Content creation swells during Q2 (n=1,518; 25.30%) and Q3 
---                 (n=1,545; 25.75%), representing 51.05% of total annual output 
---                 (n=6,000) with monthly peaks in May (n=530) and July (n=529).
---    Explanation: Late spring and summer months drive higher creator participation 
---                 and lifestyle content capture, creating a predictable seasonal surge.
---    Recommendation: Marketing Operations should concentrate high-priority brand 
---                    sponsorships and major promotional campaigns in Q2-Q3 to leverage 
---                    peak platform activity and higher content velocity.
---
--- 2. EXECUTIVE FINDING: WINTER PRODUCTION SLUMP (Q4/Q1)
---    Observation: Publishing volume declines to annual lows during Q1 (n=1,447; 24.12%), 
---                 bottoming out in February (n=469; 11.5% below May peak) and remaining 
---                 subdued through late Q4 (Nov-Dec average: 489 posts/month).
---    Explanation: Post-holiday fatigue and year-end holiday schedules temporarily 
---                 reduce creator publishing frequency between November and February.
---    Recommendation: Creator Operations should roll out post-holiday incentive campaigns 
---                    and content scheduling features in Q1 to stabilize creator 
---                    activity and prevent seasonal drop-offs.
---
--- 3. EXECUTIVE FINDING: PREDICTABLE INVENTORY BASELINE & LOW VOLATILITY
---    Observation: Monthly content creation demonstrates high operational stability, 
---                 maintaining an average baseline of 500 posts/month across the year 
---                 with minimal fluctuation (+/- 6.1% from the mean).
---    Explanation: The active user base maintains a highly habitual publishing routine, 
---                 providing a stable, low-risk content supply for advertising monetization.
---    Recommendation: Monetization Strategy teams can rely on this steady inventory 
---                    supply for predictable ad-slot pricing and revenue forecasting while 
---                    setting a 10% volume growth target for the low-velocity winter months.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+1. EXECUTIVE FINDING: MID-YEAR PUBLISHING VELOCITY PEAK (Q2/Q3)
+   Observation: Content creation swells during Q2 (n=1,518; 25.30%) and Q3 (n=1,545; 25.75%), representing 51.05% of total annual output (n=6,000) with monthly peaks in May (n=530) and July (n=529).
+
+   Explanation: Late spring and summer months drive higher creator participation and lifestyle content capture, creating a predictable seasonal surge.
+
+   Recommendation: Marketing Operations should concentrate high-priority brand sponsorships and major promotional campaigns in Q2-Q3 to leverage peak platform activity and higher content velocity.
+
+2. EXECUTIVE FINDING: WINTER PRODUCTION SLUMP (Q4/Q1)
+   Observation: Publishing volume declines to annual lows during Q1 (n=1,447; 24.12%), bottoming out in February (n=469; 11.5% below May peak) and remaining subdued through late Q4 (Nov-Dec average: 489 posts/month).
+
+   Explanation: Post-holiday fatigue and year-end holiday schedules temporarily reduce creator publishing frequency between November and February.
+
+   Recommendation: Creator Operations should roll out post-holiday incentive campaigns and content scheduling features in Q1 to stabilize creator activity and prevent seasonal drop-offs.
+
+3. EXECUTIVE FINDING: PREDICTABLE INVENTORY BASELINE & LOW VOLATILITY
+   Observation: Monthly content creation demonstrates high operational stability, maintaining an average baseline of 500 posts/month across the year with minimal fluctuation (+/- 6.1% from the mean).
+
+   Explanation: The active user base maintains a highly habitual publishing routine, providing a stable, low-risk content supply for advertising monetization.
+
+   Recommendation: Monetization Strategy teams can rely on this steady inventory supply for predictable ad-slot pricing and revenue forecasting while setting a 10% volume growth target for the low-velocity winter months.
 
 -----------------------------------------------------------------------------
 
@@ -588,30 +580,21 @@ ORDER BY avg_posts_per_day DESC;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: EQUIVALENT DAILY PUBLISHING VELOCITY ACROSS ALL DAYS
---    Observation: Daily content output is virtually identical between Weekdays 
---                 (16.49 posts/day; n=4,287 over 260 days) and Weekends (16.31 
---                 posts/day; n=1,713 over 105 days), showing a negligible variance 
---                 of only 1.09% (0.18 posts/day).
---    Explanation: User content creation behavior is habituated into a daily routine 
---                 rather than being tied to work-week or leisure cycles, demonstrating 
---                 consistent platform dependency year-round.
---    Recommendation: Product Operations and Infrastructure teams should avoid shifting 
---                    heavy system maintenance or batch processing to weekends under 
---                    the assumption of lower traffic, as platform activity remains steady.
---
--- 2. EXECUTIVE FINDING: WEEKDAY TOTAL VOLUME DOMINANCE DUE TO CALENDAR SHARE
---    Observation: Weekdays capture 71.45% of total annual content volume (n=4,287), 
---                 driven solely by representing 71.23% of the calendar year (260 days), 
---                 not by higher per-day posting intensity.
---    Explanation: Aggregate weekly metrics can give a false impression of weekday 
---                 dominance; analyzing per-day density proves individual weekend days 
---                 match weekday productivity.
---    Recommendation: Business Intelligence should mandate normalized daily averages 
---                 (posts/day) across all executive reporting rather than total sum 
---                 aggregates to prevent misinterpretation of user activity levels.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: EQUIVALENT DAILY PUBLISHING VELOCITY ACROSS ALL DAYS
+   Observation: Daily content output is virtually identical between Weekdays (16.49 posts/day; n=4,287 over 260 days) and Weekends (16.31 posts/day; n=1,713 over 105 days), showing a negligible variance of only 1.09% (0.18 posts/day).
+
+   Explanation: User content creation behavior is habituated into a daily routine rather than being tied to work-week or leisure cycles, demonstrating consistent platform dependency year-round.
+
+   Recommendation: Product Operations and Infrastructure teams should avoid shifting heavy system maintenance or batch processing to weekends under the assumption of lower traffic, as platform activity remains steady.
+
+2. EXECUTIVE FINDING: WEEKDAY TOTAL VOLUME DOMINANCE DUE TO CALENDAR SHARE
+   Observation: Weekdays capture 71.45% of total annual content volume (n=4,287), driven solely by representing 71.23% of the calendar year (260 days), not by higher per-day posting intensity.
+
+   Explanation: Aggregate weekly metrics can give a false impression of weekday dominance; analyzing per-day density proves individual weekend days match weekday productivity.
+
+   Recommendation: Business Intelligence should mandate normalized daily averages (posts/day) across all executive reporting rather than total sum aggregates to prevent misinterpretation of user activity levels.
 
 -----------------------------------------------------------------------------
 
@@ -639,29 +622,21 @@ ORDER BY avg_caption_length DESC;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: UNIFORM CAPTION BEHAVIOR & SHORT-FORM TEXT LEADERSHIP
---    Observation: Average caption lengths are remarkably uniform across all formats 
---                 (~1,080 to 1,145 characters), with Reels leading slightly at an 
---                 average of 1,145 characters—5.8% longer than standard Video (1,080 chars).
---    Explanation: Creators actively leverage longer captions on video assets (Reels) 
---                 to provide context, storytelling, or keyword-dense descriptions that 
---                 supplement visual content and improve search indexability.
---    Recommendation: Creator Operations should promote long-form caption best practices 
---                    (1,000+ characters) for Reels to maximize algorithmic discovery 
---                    and search relevance across short-form video feeds.
---
--- 2. EXECUTIVE FINDING: EXTREME CAPTION LENGTH DIVERGENCE & ZERO-TEXT UTILIZATION
---    Observation: All content formats exhibit extreme caption length ranges, spanning 
---                 from 0–2 characters at the minimum to ~2,200 characters at the maximum 
---                 (near platform character caps).
---    Explanation: Content strategies are heavily bifurcated between minimal, aesthetic 
---                 posting (zero/low text) and micro-blogging or detailed educational 
---                 posting (2,000+ characters).
---    Recommendation: Product Development should introduce structured caption templates 
---                    and AI copywriting assistants to help minimalist creators expand 
---                    short captions into search-optimized copy.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: UNIFORM CAPTION BEHAVIOR & SHORT-FORM TEXT LEADERSHIP
+   Observation: Average caption lengths are remarkably uniform across all formats (~1,080 to 1,145 characters), with Reels leading slightly at an average of 1,145 characters—5.8% longer than standard Video (1,080 chars).
+
+   Explanation: Creators actively leverage longer captions on video assets (Reels) to provide context, storytelling, or keyword-dense descriptions that supplement visual content and improve search indexability.
+
+   Recommendation: Creator Operations should promote long-form caption best practices (1,000+ characters) for Reels to maximize algorithmic discovery and search relevance across short-form video feeds.
+
+2. EXECUTIVE FINDING: EXTREME CAPTION LENGTH DIVERGENCE & ZERO-TEXT UTILIZATION
+   Observation: All content formats exhibit extreme caption length ranges, spanning from 0–2 characters at the minimum to ~2,200 characters at the maximum (near platform character caps).
+
+   Explanation: Content strategies are heavily bifurcated between minimal, aesthetic posting (zero/low text) and micro-blogging or detailed educational posting (2,000+ characters).
+
+   Recommendation: Product Development should introduce structured caption templates and AI copywriting assistants to help minimalist creators expand short captions into search-optimized copy.
 
 -----------------------------------------------------------------------------
 
@@ -710,38 +685,28 @@ ORDER BY avg_engagement_per_post DESC;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: UNIFORM FORMAT PERFORMANCE WITH SLIGHT VIDEO OUTPERFORMANCE
---    Observation: Average engagement per post remains tightly clustered across all 
---                 formats (2.68 to 2.81 interactions/post), with legacy Video leading 
---                 slightly at 2.81—3.7% above the overall platform average (~2.71).
---    Explanation: Interaction yield per asset is balanced across formats, indicating 
---                 that content distribution algorithms distribute engagement uniformly 
---                 regardless of whether the media type is static or video.
---    Recommendation: Content Strategy teams should maintain a diversified format mix 
---                    rather than over-indexing purely on video production, as static 
---                    and multi-frame assets yield nearly identical engagement density.
---
--- 2. EXECUTIVE FINDING: REELS & IMAGES DRIVE 82% OF TOTAL ENGAGEMENT VOLUME
---    Observation: Total platform interactions (n=14,999) are heavily dominated by 
---                 Images (40.64%, n=6,096) and Reels (29.90%, n=4,485), together 
---                 generating 70.54% of all platform engagement.
---    Explanation: High total engagement for Images and Reels is driven by sheer 
---                 publishing volume (n=2,253 and n=1,650 posts respectively) rather 
---                 than significantly higher per-post efficiency.
---    Recommendation: Creator Operations should incentivize creators to maintain high 
---                    publishing velocity on Images and Reels to safeguard baseline 
---                    platform interaction inventory for ad monetization.
---
--- 3. EXECUTIVE FINDING: CAROUSEL UNDERPERFORMANCE RELATIVE TO PRODUCTION EFFORT
---    Observation: Carousels generate the lowest average engagement (2.68 interactions/post; 
---                 n=2,985 total) despite being the most resource-intensive static asset.
---    Explanation: Users consume multi-frame content primarily via swipe duration (dwell 
---                 time) rather than explicitly tapping likes, comments, or shares.
---    Recommendation: Product Development should introduce interactive elements within 
---                    Carousels (e.g., inline polls, swipe stickers) to convert passive 
---                    dwell time into active interaction counts.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: UNIFORM FORMAT PERFORMANCE WITH SLIGHT VIDEO OUTPERFORMANCE
+   Observation: Average engagement per post remains tightly clustered across all formats (2.68 to 2.81 interactions/post), with legacy Video leading slightly at 2.81—3.7% above the overall platform average (~2.71).
+
+   Explanation: Interaction yield per asset is balanced across formats, indicating that content distribution algorithms distribute engagement uniformly regardless of whether the media type is static or video.
+
+   Recommendation: Content Strategy teams should maintain a diversified format mix rather than over-indexing purely on video production, as static and multi-frame assets yield nearly identical engagement density.
+
+2. EXECUTIVE FINDING: REELS & IMAGES DRIVE 82% OF TOTAL ENGAGEMENT VOLUME
+   Observation: Total platform interactions (n=14,999) are heavily dominated by Images (40.64%, n=6,096) and Reels (29.90%, n=4,485), together generating 70.54% of all platform engagement.
+
+   Explanation: High total engagement for Images and Reels is driven by sheer publishing volume (n=2,253 and n=1,650 posts respectively) rather than significantly higher per-post efficiency.
+
+   Recommendation: Creator Operations should incentivize creators to maintain high publishing velocity on Images and Reels to safeguard baseline platform interaction inventory for ad monetization.
+
+3. EXECUTIVE FINDING: CAROUSEL UNDERPERFORMANCE RELATIVE TO PRODUCTION EFFORT
+   Observation: Carousels generate the lowest average engagement (2.68 interactions/post; n=2,985 total) despite being the most resource-intensive static asset.
+
+   Explanation: Users consume multi-frame content primarily via swipe duration (dwell time) rather than explicitly tapping likes, comments, or shares.
+
+   Recommendation: Product Development should introduce interactive elements within Carousels (e.g., inline polls, swipe stickers) to convert passive dwell time into active interaction counts.
 
 -----------------------------------------------------------------------------
 
@@ -789,39 +754,27 @@ ORDER BY total_interactions_made DESC;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: PERSONAL ACCOUNTS DRIVE TOP OUTGOING INTERACTION VOLUME
---    Observation: 70% of the top 10 most active non-verified users (n=7) hold 
---                 Personal account types, led by the top-ranked account 
---                 (15 interactions) and the second-ranked account (14 interactions).
---    Explanation: High interaction volume among non-verified personal accounts 
---                 signals core "super-fan" behavior—highly engaged power users who 
---                 consume and react to content heavily without monetizing their profiles.
---    Recommendation: Community Management should establish automated engagement 
---                    milestone rewards (e.g., top fan badges, early feature access) 
---                    to retain these organic power users and sustain platform activity.
---
--- 2. EXECUTIVE FINDING: EMERGING CREATOR & BUSINESS CONVERSION PIPELINE
---    Observation: Highly active non-verified users also include Creator accounts 
---                 (e.g., one account at 13 interactions) and Business accounts 
---                 (e.g., two accounts tied at 12 interactions each).
---    Explanation: Non-verified business and creator profiles with high engagement 
---                 represent active professional users who have not yet navigated 
---                 or qualified for official platform verification.
---    Recommendation: Creator Growth teams should build a proactive outreach funnel 
---                    targeting non-verified power accounts (10+ interactions) to 
---                    fast-track verification and boost creator retention.
---
--- 3. EXECUTIVE FINDING: GEOGRAPHICALLY DISPERSED SUPER-FAN BASE
---    Observation: Top active non-verified users span highly diverse international 
---                 markets (e.g., Netherlands, Nepal, Timor-Leste, Philippines, South Africa) 
---                 without regional concentration.
---    Explanation: Platform affinity and heavy engagement are globally distributed, 
---                 indicating strong organic user stickiness in developing and emerging markets.
---    Recommendation: International Product teams should ensure localization and low-bandwidth 
---                    performance optimization in these key growth regions to support 
---                    high-frequency power users.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+1. EXECUTIVE FINDING: PERSONAL ACCOUNTS DRIVE TOP OUTGOING INTERACTION VOLUME
+   Observation: 70% of the top 10 most active non-verified users (n=7) hold Personal account types, led by the top-ranked account (15 interactions) and the second-ranked account (14 interactions).
+
+   Explanation: High interaction volume among non-verified personal accounts signals core "super-fan" behavior—highly engaged power users who consume and react to content heavily without monetizing their profiles.
+
+   Recommendation: Community Management should establish automated engagement milestone rewards (e.g., top fan badges, early feature access) to retain these organic power users and sustain platform activity.
+
+2. EXECUTIVE FINDING: EMERGING CREATOR & BUSINESS CONVERSION PIPELINE
+   Observation: Highly active non-verified users also include Creator accounts (e.g., one account at 13 interactions) and Business accounts (e.g., two accounts tied at 12 interactions each).
+
+   Explanation: Non-verified business and creator profiles with high engagement represent active professional users who have not yet navigated or qualified for official platform verification.
+
+   Recommendation: Creator Growth teams should build a proactive outreach funnel targeting non-verified power accounts (10+ interactions) to fast-track verification and boost creator retention.
+
+3. EXECUTIVE FINDING: GEOGRAPHICALLY DISPERSED SUPER-FAN BASE
+   Observation: Top active non-verified users span highly diverse international markets (e.g., Netherlands, Nepal, Timor-Leste, Philippines, South Africa) without regional concentration.
+
+   Explanation: Platform affinity and heavy engagement are globally distributed, indicating strong organic user stickiness in developing and emerging markets.
+
+   Recommendation: International Product teams should ensure localization and low-bandwidth performance optimization in these key growth regions to support high-frequency power users.
 
 -----------------------------------------------------------------------------
 
@@ -860,33 +813,28 @@ ORDER BY audio_status, interaction_volume DESC;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: AUDIO CONTENT DRIVES ENGAGEMENT VOLUME SUPERIORITY
---    Observation: Content with audio generates 69.18% of total platform interactions 
---                 (n=10,376), outperforming non-audio content (30.82%, n=4,623) 
---                 by more than a 2.2x margin.
---    Explanation: Audio-enhanced media commands higher platform distribution and user 
---                 attention, yielding significantly higher total engagement volume.
---    Recommendation: Marketing Strategy should prioritize audio-backed creative formats 
---                    across major promotional campaigns to maximize reach and volume.
---
--- 2. EXECUTIVE FINDING: LIKES HEAVILY DOMINATE AUDIO CONTENT INTERACTION MIX
---    Observation: For audio content, Likes account for 52.15% of total platform 
---                 interactions (n=7,822), vastly outstripping Comments (10.14%, n=1,521) 
---                 and Shares (6.89%, n=1,033).
---    Explanation: Audio content induces low-friction passive consumption where users 
---                 frequently signal approval via Likes rather than high-friction actions.
---    Recommendation: Product Development should introduce interactive audio stickers and 
---                    in-stream comment prompts to convert passive Likes into Comments.
---
--- 3. EXECUTIVE FINDING: NON-AUDIO CONTENT SUFFERS FROM LOW SHAREABILITY
---    Observation: Non-audio content yields the lowest interaction volume across all 
---                 categories, bottoming out at Shares (2.95%, n=442) and Comments (4.47%, n=671).
---    Explanation: Static or silent media lacks the viral distribution dynamic of trending 
---                 audio, making users significantly less likely to share content externally.
---    Recommendation: Creator Operations should incentivize creators to attach audio tracks 
---                    to static posts to elevate baseline shareability and viral reach.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: AUDIO CONTENT DRIVES ENGAGEMENT VOLUME SUPERIORITY
+   Observation: Content with audio generates 69.18% of total platform interactions (n=10,376), outperforming non-audio content (30.82%, n=4,623) by more than a 2.2x margin.
+
+   Explanation: Audio-enhanced media commands higher platform distribution and user attention, yielding significantly higher total engagement volume.
+
+   Recommendation: Marketing Strategy should prioritize audio-backed creative formats across major promotional campaigns to maximize reach and volume.
+
+2. EXECUTIVE FINDING: LIKES HEAVILY DOMINATE AUDIO CONTENT INTERACTION MIX
+   Observation: For audio content, Likes account for 52.15% of total platform interactions (n=7,822), vastly outstripping Comments (10.14%, n=1,521) and Shares (6.89%, n=1,033).
+
+   Explanation: Audio content induces low-friction passive consumption where users frequently signal approval via Likes rather than high-friction actions.
+
+   Recommendation: Product Development should introduce interactive audio stickers and in-stream comment prompts to convert passive Likes into Comments.
+
+3. EXECUTIVE FINDING: NON-AUDIO CONTENT SUFFERS FROM LOW SHAREABILITY
+   Observation: Non-audio content yields the lowest interaction volume across all categories, bottoming out at Shares (2.95%, n=442) and Comments (4.47%, n=671).
+
+   Explanation: Static or silent media lacks the viral distribution dynamic of trending audio, making users significantly less likely to share content externally.
+
+   Recommendation: Creator Operations should incentivize creators to attach audio tracks to static posts to elevate baseline shareability and viral reach.
 
 -----------------------------------------------------------------------------
 
@@ -920,32 +868,21 @@ ORDER BY avg_daily_volume DESC;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: MID-WEEK TO FRIDAY ENGAGEMENT PEAK (TUE-FRI), LED BY TUESDAY
---    Observation: Only four days—Tuesday (42/day, the platform-wide maximum; 
---                 n=2,173 across 52 occurrences), Friday (41/day), Wednesday 
---                 (41/day), and Thursday (41/day)—exceed the global platform 
---                 baseline average (~41.1 daily interactions).
---    Explanation: User engagement concentrates heavily mid-week through Friday, 
---                 creating a predictable 4-day window of heightened user activity, 
---                 with Tuesday marking the point of peak algorithmic distribution 
---                 for early-week content.
---    Recommendation: Community Management and Moderation teams should shift staff 
---                    rosters to prioritize coverage between Tuesday and Friday, and 
---                    Infrastructure Operations should avoid scheduling major system 
---                    deployments or maintenance on Tuesdays to prevent disruption 
---                    during peak traffic load.
---
--- 2. EXECUTIVE FINDING: WEEKEND & MONDAY ENGAGEMENT DEFICIT
---    Observation: Monday, Saturday, and Sunday are excluded from the results because 
---                 their daily averages fall strictly below the platform average threshold.
---    Explanation: User interaction drops over weekends and early Mondays due to 
---                 offline lifestyle patterns and work-week transitions.
---    Recommendation: Marketing Operations should schedule platform notifications and 
---                    re-engagement campaigns on Monday mornings to stimulate 
---                    early-week interaction volume.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
 
+1. EXECUTIVE FINDING: MID-WEEK TO FRIDAY ENGAGEMENT PEAK (TUE-FRI), LED BY TUESDAY
+   Observation: Only four days—Tuesday (42/day, the platform-wide maximum; n=2,173 across 52 occurrences), Friday (41/day), Wednesday (41/day), and Thursday (41/day)—exceed the global platform baseline average (~41.1 daily interactions).
+
+   Explanation: User engagement concentrates heavily mid-week through Friday, creating a predictable 4-day window of heightened user activity, with Tuesday marking the point of peak algorithmic distribution for early-week content.
+
+   Recommendation: Community Management and Moderation teams should shift staff rosters to prioritize coverage between Tuesday and Friday, and Infrastructure Operations should avoid scheduling major system deployments or maintenance on Tuesdays to prevent disruption during peak traffic load.
+
+2. EXECUTIVE FINDING: WEEKEND & MONDAY ENGAGEMENT DEFICIT
+   Observation: Monday, Saturday, and Sunday are excluded from the results because their daily averages fall strictly below the platform average threshold.
+
+   Explanation: User interaction drops over weekends and early Mondays due to offline lifestyle patterns and work-week transitions.
+
+   Recommendation: Marketing Operations should schedule platform notifications and re-engagement campaigns on Monday mornings to stimulate early-week interaction volume.
 
 -----------------------------------------------------------------------------
 
@@ -997,36 +934,29 @@ ORDER BY follower_to_following_ratio DESC;
 ```
 
 INSIGHTS:
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: BUSINESS ACCOUNTS LEAD AS NET NETWORK INFLUENCERS
---    Observation: Business accounts generate the highest aggregate ratio at 1.07 
---                 (4,384 followers vs. 4,101 following), standing out as the only 
---                 category where audience size exceeds outgoing follows.
---    Explanation: Commercial accounts naturally command net audience growth 
---                 as platform users follow brand profiles for products, updates, 
---                 and customer support without expecting reciprocal follows.
---    Recommendation: Brand Growth teams should leverage this authority signal 
---                    by incentivizing Business accounts to utilize promoted posts 
---                    and ad tools to expand their follower base further.
---
--- 2. EXECUTIVE FINDING: PERSONAL ACCOUNTS MAINTAIN BALANCED RECIPROCAL NETWORKS
---    Observation: Personal profiles demonstrate a perfectly balanced 1.00 ratio 
---                 (2,775 followers vs. 2,766 following; ~50% total network volume).
---    Explanation: Everyday individual users operate on a strict "follow-for-follow" 
---                 reciprocal dynamic within peer-to-peer friend and acquaintance networks.
---    Recommendation: Product Development should maintain friend-suggestion features 
---                    and contact-sync onboarding to preserve low-friction mutual 
---                    connections among personal account holders.
---
--- 3. EXECUTIVE FINDING: CREATOR ACCOUNTS SUFFER FROM DEFICIT NETWORK RATIOS
---    Observation: Creator profiles exhibit a deficit ratio of 0.95 (776 followers 
---                 vs. 813 following), maintaining more outgoing follows than audience.
---    Explanation: Emerging creators actively follow other accounts to build network 
---                 visibility, but struggle to convert that outreach into incoming followers.
---    Recommendation: Creator Operations should provide growth toolkits and profile 
---                    optimization guidelines to help non-verified creators convert 
---                    profile views into net follower growth.
--- ---------------------------------------------------------------------------
+
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: BUSINESS ACCOUNTS LEAD AS NET NETWORK INFLUENCERS
+   Observation: Business accounts generate the highest aggregate ratio at 1.07 (4,384 followers vs. 4,101 following), standing out as the only category where audience size exceeds outgoing follows.
+
+   Explanation: Commercial accounts naturally command net audience growth as platform users follow brand profiles for products, updates, and customer support without expecting reciprocal follows.
+
+   Recommendation: Brand Growth teams should leverage this authority signal by incentivizing Business accounts to utilize promoted posts and ad tools to expand their follower base further.
+
+2. EXECUTIVE FINDING: PERSONAL ACCOUNTS MAINTAIN BALANCED RECIPROCAL NETWORKS
+   Observation: Personal profiles demonstrate a perfectly balanced 1.00 ratio (2,775 followers vs. 2,766 following; ~50% total network volume).
+
+   Explanation: Everyday individual users operate on a strict "follow-for-follow" reciprocal dynamic within peer-to-peer friend and acquaintance networks.
+
+   Recommendation: Product Development should maintain friend-suggestion features and contact-sync onboarding to preserve low-friction mutual connections among personal account holders.
+
+3. EXECUTIVE FINDING: CREATOR ACCOUNTS SUFFER FROM DEFICIT NETWORK RATIOS
+   Observation: Creator profiles exhibit a deficit ratio of 0.95 (776 followers vs. 813 following), maintaining more outgoing follows than audience.
+
+   Explanation: Emerging creators actively follow other accounts to build network visibility, but struggle to convert that outreach into incoming followers.
+
+   Recommendation: Creator Operations should provide growth toolkits and profile optimization guidelines to help non-verified creators convert profile views into net follower growth.
 
 -----------------------------------------------------------------------------
 
@@ -1067,41 +997,27 @@ ORDER BY engagement_to_creation_ratio DESC;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: EXTREME CONSUMPTION OUTLIERS DRIVEN BY SMALL-MARKET USERS
---    Observation: Honduras leads global engagement-to-creation density with a 10.00 
---                 ratio (20 posts vs. 200 interactions across 2 users), followed by 
---                 Nauru (5.57 ratio) and Moldova (5.55 ratio), compared to a platform 
---                 baseline range of 2.00–3.00.
---    Explanation: Smaller, emerging user clusters demonstrate highly active content 
---                 consumption relative to publishing output, signaling strong organic 
---                 content demand that outpaces local creator inventory.
---    Recommendation: Strategic Expansion teams should target creator acquisition 
---                    campaigns in high-ratio markets (Honduras, Nauru, Moldova) to 
---                    supply local creators and capture under-monetized engagement.
---
--- 2. EXECUTIVE FINDING: CORE COMMERCIAL MARKETS EXHIBIT CREATION-HEAVY DYNAMICS
---    Observation: Major established user bases show significantly lower ratios, 
---                 including the United States (1.91 ratio; n=35 posts, 67 interactions), 
---                 India (1.94 ratio), France (1.76 ratio), and Indonesia (1.76 ratio).
---    Explanation: High creator density and active publishing behavior in mature 
---                 geographies dilute aggregate engagement-per-post ratios, creating 
---                 a hyper-competitive environment for audience attention.
---    Recommendation: Product Marketing should deploy reach-boosting tools and paid 
---                    amplification features in saturated markets (US, India, France) 
---                    to help creators break through high publishing volume.
---
--- 3. EXECUTIVE FINDING: ENGAGEMENT DEFICIT IN SELECT CREATOR-DOMINATED REGIONS
---    Observation: Low-ratio markets at the bottom of the spectrum—such as Guam (1.00 ratio), 
---                 Saint Lucia (1.21 ratio), and Iraq (1.50 ratio)—generate nearly equal 
---                 posts and interactions (e.g., Guam: 22 posts vs. 22 interactions).
---    Explanation: High post creation paired with minimal audience reaction indicates 
---                 either a breakdown in local feed distribution algorithms or a lack 
---                 of active consumer accounts in these sub-regions.
---    Recommendation: Growth Engineering should review content distribution pipelines 
---                    in under-engaging regions to ensure locally produced content 
---                    is effectively served to relevant target audiences.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+1. EXECUTIVE FINDING: EXTREME CONSUMPTION OUTLIERS DRIVEN BY SMALL-MARKET USERS
+   Observation: Honduras leads global engagement-to-creation density with a 10.00 ratio (20 posts vs. 200 interactions across 2 users), followed by Nauru (5.57 ratio) and Moldova (5.55 ratio), compared to a platform baseline range of 2.00–3.00.
+
+   Explanation: Smaller, emerging user clusters demonstrate highly active content consumption relative to publishing output, signaling strong organic content demand that outpaces local creator inventory.
+
+   Recommendation: Strategic Expansion teams should target creator acquisition campaigns in high-ratio markets (Honduras, Nauru, Moldova) to supply local creators and capture under-monetized engagement.
+
+2. EXECUTIVE FINDING: CORE COMMERCIAL MARKETS EXHIBIT CREATION-HEAVY DYNAMICS
+   Observation: Major established user bases show significantly lower ratios, including the United States (1.91 ratio; n=35 posts, 67 interactions), India (1.94 ratio), France (1.76 ratio), and Indonesia (1.76 ratio).
+
+   Explanation: High creator density and active publishing behavior in mature geographies dilute aggregate engagement-per-post ratios, creating a hyper-competitive environment for audience attention.
+
+   Recommendation: Product Marketing should deploy reach-boosting tools and paid amplification features in saturated markets (US, India, France) to help creators break through high publishing volume.
+
+3. EXECUTIVE FINDING: ENGAGEMENT DEFICIT IN SELECT CREATOR-DOMINATED REGIONS
+   Observation: Low-ratio markets at the bottom of the spectrum—such as Guam (1.00 ratio), Saint Lucia (1.21 ratio), and Iraq (1.50 ratio)—generate nearly equal posts and interactions (e.g., Guam: 22 posts vs. 22 interactions).
+
+   Explanation: High post creation paired with minimal audience reaction indicates either a breakdown in local feed distribution algorithms or a lack of active consumer accounts in these sub-regions.
+
+   Recommendation: Growth Engineering should review content distribution pipelines in under-engaging regions to ensure locally produced content is effectively served to relevant target audiences.
 
 -----------------------------------------------------------------------------
 
@@ -1150,32 +1066,21 @@ ORDER BY avg_active_followers_per_account DESC;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: VERIFIED BADGES DRIVE AUDIENCE SCALE & ACQUISITION LEVERAGE
---    Observation: Verified accounts command 1,203 active followers per profile 
---                 (n=20,453 across 17 accounts)—over 54x the average follower size 
---                 of unverified profiles (22 followers/account; n=22,242 across 992 accounts).
---    Explanation: Verification badges act as strong authority signals in search, 
---                 recommendation algorithms, and discovery feeds, driving high-volume 
---                 organic follower acquisition.
---    Recommendation: Creator Growth teams should establish clear verification pathways 
---                    for high-potential creators to accelerate audience growth and 
---                    boost overall platform retention.
---
--- 2. EXECUTIVE FINDING: VERIFIED PROFILES SUFFER HIGHER FOLLOWER CHURN THAN UNVERIFIED PEERS
---    Observation: Verified accounts experience a higher network churn rate at 25.52% 
---                 (unfollows relative to total gross follows) compared to 22.32% for 
---                 unverified profiles—a 3.20 percentage point gap—even though unverified 
---                 accounts hold the larger share of total active followers (52.1%, n=22,242).
---    Explanation: Larger follower bases attract passive or casual audience members who 
---                 churn at higher rates when content strategy or publishing frequency 
---                 shifts, whereas smaller unverified accounts tend to build close-knit, 
---                 reciprocal peer networks with lower unfollow friction.
---    Recommendation: Product Operations should build audience re-engagement alerts and 
---                    churn-analytics dashboards specifically for verified accounts, while 
---                    Community Management tests peer-to-peer engagement features within 
---                    stable unverified user circles.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: VERIFIED BADGES DRIVE AUDIENCE SCALE & ACQUISITION LEVERAGE
+   Observation: Verified accounts command 1,203 active followers per profile (n=20,453 across 17 accounts)—over 54x the average follower size of unverified profiles (22 followers/account; n=22,242 across 992 accounts).
+
+   Explanation: Verification badges act as strong authority signals in search, recommendation algorithms, and discovery feeds, driving high-volume organic follower acquisition.
+
+   Recommendation: Creator Growth teams should establish clear verification pathways for high-potential creators to accelerate audience growth and boost overall platform retention.
+
+2. EXECUTIVE FINDING: VERIFIED PROFILES SUFFER HIGHER FOLLOWER CHURN THAN UNVERIFIED PEERS
+   Observation: Verified accounts experience a higher network churn rate at 25.52% (unfollows relative to total gross follows) compared to 22.32% for unverified profiles—a 3.20 percentage point gap—even though unverified accounts hold the larger share of total active followers (52.1%, n=22,242).
+
+   Explanation: Larger follower bases attract passive or casual audience members who churn at higher rates when content strategy or publishing frequency shifts, whereas smaller unverified accounts tend to build close-knit, reciprocal peer networks with lower unfollow friction.
+
+   Recommendation: Product Operations should build audience re-engagement alerts and churn-analytics dashboards specifically for verified accounts, while Community Management tests peer-to-peer engagement features within stable unverified user circles.
 
 -----------------------------------------------------------------------------
 
@@ -1225,38 +1130,28 @@ ORDER BY
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: MID-YEAR SURGE & HIGH-VOLUME EXPANSION (MAY & AUGUST)
---    Observation: Network expansion peaks during May (n=366 net connections; +8.28% MoM) 
---                 and August (n=361 net connections; +4.34% MoM), driving strong 
---                 seasonal user discovery during late spring and summer months.
---    Explanation: Elevated user activity and increased content publishing during 
---                 Q2 and Q3 naturally accelerate account discovery and new follow 
---                 relationship creation.
---    Recommendation: Marketing Strategy should execute user acquisition and brand 
---                    partnership campaigns during these high-growth periods to maximize 
---                    organic network density.
---
--- 2. EXECUTIVE FINDING: RECURRING POST-SUMMER CONTRACTION (SEPTEMBER DIP)
---    Observation: September experiences the sharpest single-month contraction of the 
---                 year (-17.73% MoM; dropping by 64 net connections to a low of 297), 
---                 following a similar early-year dip in February (-9.88% MoM; n=292).
---    Explanation: Seasonal transitions (e.g., return-to-school/work routines in autumn) 
---                 temporarily reduce active browsing and new profile discovery.
---    Recommendation: Product Growth teams should deploy targeted re-engagement pushes 
---                    and follow-recommendation prompts in late Q3 to mitigate seasonal 
---                    drop-offs in network expansion.
---
--- 3. EXECUTIVE FINDING: STABLE ANNUAL NETWORK GROWTH WITH RESILIENT Q4 RECOVERY
---    Observation: Total net-new active connections reach 3,990 across the year, 
---                 maintaining a consistent baseline average of ~332 connections/month 
---                 and rebounding strongly in December (+10.58% MoM; n=345).
---    Explanation: Strong year-end recovery demonstrates healthy core network retention 
---                 and platform resilience, balancing out mid-year seasonal fluctuations.
---    Recommendation: Executive Leadership can rely on steady ~3,900+ annual net-new 
---                 connection growth for long-term user retention models and ad placement 
---                 forecasts.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: MID-YEAR SURGE & HIGH-VOLUME EXPANSION (MAY & AUGUST)
+   Observation: Network expansion peaks during May (n=366 net connections; +8.28% MoM) and August (n=361 net connections; +4.34% MoM), driving strong seasonal user discovery during late spring and summer months.
+
+   Explanation: Elevated user activity and increased content publishing during Q2 and Q3 naturally accelerate account discovery and new follow relationship creation.
+
+   Recommendation: Marketing Strategy should execute user acquisition and brand partnership campaigns during these high-growth periods to maximize organic network density.
+
+2. EXECUTIVE FINDING: RECURRING POST-SUMMER CONTRACTION (SEPTEMBER DIP)
+   Observation: September experiences the sharpest single-month contraction of the year (-17.73% MoM; dropping by 64 net connections to a low of 297), following a similar early-year dip in February (-9.88% MoM; n=292).
+
+   Explanation: Seasonal transitions (e.g., return-to-school/work routines in autumn) temporarily reduce active browsing and new profile discovery.
+
+   Recommendation: Product Growth teams should deploy targeted re-engagement pushes and follow-recommendation prompts in late Q3 to mitigate seasonal drop-offs in network expansion.
+
+3. EXECUTIVE FINDING: STABLE ANNUAL NETWORK GROWTH WITH RESILIENT Q4 RECOVERY
+   Observation: Total net-new active connections reach 3,990 across the year, maintaining a consistent baseline average of ~332 connections/month and rebounding strongly in December (+10.58% MoM; n=345).
+
+   Explanation: Strong year-end recovery demonstrates healthy core network retention and platform resilience, balancing out mid-year seasonal fluctuations.
+
+   Recommendation: Executive Leadership can rely on steady ~3,900+ annual net-new connection growth for long-term user retention models and ad placement forecasts.
 
 -----------------------------------------------------------------------------
 
@@ -1311,33 +1206,21 @@ LIMIT 15;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: TOP QUARTILE HASHTAG EFFICIENCY CLUSTERS TIGHTLY NEAR 1.00
---    Observation: The top 15 most-used hashtags (Quartile 1) maintain an extremely 
---                 tight engagement efficiency spread of 0.94 to 1.00, led by #which 
---                 (1.00 ratio; Rank 2) and #speak (1.00 ratio; Rank 6), with no 
---                 significant drop-off in per-application returns across the tier.
---    Explanation: High-frequency hashtags capture steady, proportional interaction 
---                 returns relative to post volume, and high platform adoption does 
---                 not dilute performance—making these tags dependable anchors for 
---                 baseline algorithmic categorization and reach.
---    Recommendation: Content Strategy should establish these top-quartile hashtags 
---                    as core tagging templates, and Product Development can safely 
---                    expand auto-suggested hashtag features using them without 
---                    risking engagement decay.
---
--- 2. EXECUTIVE FINDING: DISCREPANCY BETWEEN USAGE VOLUME AND ABSOLUTE ENGAGEMENT
---    Observation: Usage volume among Quartile 1 tags ranges from 62 to 76 applications, 
---                 yet absolute engagement ranking varies significantly—e.g., #rock 
---                 ranks 1st globally (75 interactions; 76 posts) while #economic 
---                 drops to 10th rank (64 interactions; 68 posts; 0.94 efficiency).
---    Explanation: Broad or generic utility tags (e.g., #economic) suffer from lower 
---                 topic alignment, yielding lower engagement conversion per usage 
---                 compared to expressive lifestyle tags (e.g., #rock, #which).
---    Recommendation: Creator Education teams should advise creators against relying 
---                    solely on generic tags and encourage pairing high-volume tags 
---                    with niche, high-intent micro-hashtags.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: TOP QUARTILE HASHTAG EFFICIENCY CLUSTERS TIGHTLY NEAR 1.00
+   Observation: The top 15 most-used hashtags (Quartile 1) maintain an extremely tight engagement efficiency spread of 0.94 to 1.00, led by #which (1.00 ratio; Rank 2) and #speak (1.00 ratio; Rank 6), with no significant drop-off in per-application returns across the tier.
+
+   Explanation: High-frequency hashtags capture steady, proportional interaction returns relative to post volume, and high platform adoption does not dilute performance—making these tags dependable anchors for baseline algorithmic categorization and reach.
+
+   Recommendation: Content Strategy should establish these top-quartile hashtags as core tagging templates, and Product Development can safely expand auto-suggested hashtag features using them without risking engagement decay.
+
+2. EXECUTIVE FINDING: DISCREPANCY BETWEEN USAGE VOLUME AND ABSOLUTE ENGAGEMENT
+   Observation: Usage volume among Quartile 1 tags ranges from 62 to 76 applications, yet absolute engagement ranking varies significantly—e.g., #rock ranks 1st globally (75 interactions; 76 posts) while #economic drops to 10th rank (64 interactions; 68 posts; 0.94 efficiency).
+
+   Explanation: Broad or generic utility tags (e.g., #economic) suffer from lower topic alignment, yielding lower engagement conversion per usage compared to expressive lifestyle tags (e.g., #rock, #which).
+
+   Recommendation: Creator Education teams should advise creators against relying solely on generic tags and encourage pairing high-volume tags with niche, high-intent micro-hashtags.
 
 -----------------------------------------------------------------------------
 
@@ -1402,41 +1285,28 @@ ORDER BY full_date DESC;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: STABLE BASELINE MONOTONY WITH LOW VOLATILITY
---    Observation: Over 93.5% of the December trailing sample (29 out of 31 days) 
---                 operates strictly within the "Stable Baseline" performance corridor, 
---                 with the 7-day rolling average anchoring tightly between 38 and 45 
---                 interactions/day.
---    Explanation: Platform consumption exhibits highly predictable engagement patterns, 
---                 meaning overall interaction throughput is driven by habitual user 
---                 routines rather than wild, unpredictable platform-wide swings.
---    Recommendation: Capacity Planning & Infrastructure teams can rely on the ~41 
---                    daily interaction baseline for server load provisioning without 
---                    needing massive elasticity headroom for frequent viral spikes.
---
--- 2. EXECUTIVE FINDING: ISOLATED DOWNSIDE DROPS DURING HOLIDAY/WEEKEND PERIODS
---    Observation: Only two notable outliers occurred in December: December 15th 
---                 (27 interactions; -12 vs. trend) and December 30th (25 interactions; 
---                 -15 vs. trend), both triggering "Negative Drop" flags (<75% of 7D avg).
---    Explanation: Drops align directly with key pre-holiday travel and holiday weekend 
---                 windows where offline user activity naturally competes with platform 
---                 session duration.
---    Recommendation: Marketing Operations should avoid launching major campaign 
---                    milestones or time-sensitive promotional activations on major 
---                    holiday eves to prevent underperforming reach metrics.
---
--- 3. EXECUTIVE FINDING: MID-WEEK RALLY DAYS NEAREST TO POSITIVE SPIKE THRESHOLD
---    Observation: Highest single-day volumes peaked at 49–51 interactions (e.g., Dec 5, 
---                 Dec 14, Dec 19), approaching the 1.25x "Positive Spike" threshold 
---                 (~51–53 interactions required) without breaching it.
---    Explanation: Mid-week content cycles regularly generate 15%–20% positive deviations 
---                 above trailing averages, signaling organic engagement momentum on 
---                 Tuesdays and Thursdays.
---    Recommendation: Ad Sales and Monetization teams should price premium sponsored 
---                    inventory higher during mid-week windows (Tuesday–Thursday) to 
---                    capture predictable positive momentum shifts above the rolling average.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: STABLE BASELINE MONOTONY WITH LOW VOLATILITY
+   Observation: Over 93.5% of the December trailing sample (29 out of 31 days) operates strictly within the "Stable Baseline" performance corridor, with the 7-day rolling average anchoring tightly between 38 and 45 interactions/day.
+
+   Explanation: Platform consumption exhibits highly predictable engagement patterns, meaning overall interaction throughput is driven by habitual user routines rather than wild, unpredictable platform-wide swings.
+
+   Recommendation: Capacity Planning & Infrastructure teams can rely on the ~41 daily interaction baseline for server load provisioning without needing massive elasticity headroom for frequent viral spikes.
+
+2. EXECUTIVE FINDING: ISOLATED DOWNSIDE DROPS DURING HOLIDAY/WEEKEND PERIODS
+   Observation: Only two notable outliers occurred in December: December 15th (27 interactions; -12 vs. trend) and December 30th (25 interactions; -15 vs. trend), both triggering "Negative Drop" flags (<75% of 7D avg).
+
+   Explanation: Drops align directly with key pre-holiday travel and holiday weekend windows where offline user activity naturally competes with platform session duration.
+
+   Recommendation: Marketing Operations should avoid launching major campaign milestones or time-sensitive promotional activations on major holiday eves to prevent underperforming reach metrics.
+
+3. EXECUTIVE FINDING: MID-WEEK RALLY DAYS NEAREST TO POSITIVE SPIKE THRESHOLD
+   Observation: Highest single-day volumes peaked at 49–51 interactions (e.g., Dec 5, Dec 14, Dec 19), approaching the 1.25x "Positive Spike" threshold (~51–53 interactions required) without breaching it.
+
+   Explanation: Mid-week content cycles regularly generate 15%–20% positive deviations above trailing averages, signaling organic engagement momentum on Tuesdays and Thursdays.
+
+   Recommendation: Ad Sales and Monetization teams should price premium sponsored inventory higher during mid-week windows (Tuesday–Thursday) to capture predictable positive momentum shifts above the rolling average.
 
 -----------------------------------------------------------------------------
 
@@ -1508,40 +1378,28 @@ ORDER BY interaction_to_follower_multiplier DESC;
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: PERSONAL PROFILES DOMINATE BREAKOUT EFFICIENCY
---    Observation: 80% of the qualifying breakout creators (n=12 out of 15) hold 
---                 Personal account classifications, led by the top-ranked account 
---                 (28.00x multiplier; 28 interactions across a single follower) and 
---                 the second-ranked account (24.00x multiplier).
---    Explanation: Non-commercial, personal profiles often post hyper-authentic, highly 
---                 relatable content that drives disproportionate viral engagement relative 
---                 to their micro-audience size.
---    Recommendation: Creator Partnerships teams should expand influencer scouting beyond 
---                    formal "Creator" account tags to include high-efficiency Personal profiles 
---                    for hyper-cost-effective micro-sponsorships.
---
--- 2. EXECUTIVE FINDING: MASSIVE ENGAGEMENT OUTLIERS IN THE BOTTOM AUDIENCE TIERS
---    Observation: Every identified breakout user resides in the bottom 5th percentile 
---                 for follower count (4.7th percentile; exactly 1 follower each) while 
---                 ranking in the top 3.3% globally for total earned engagement (96.7th to 99.9th percentile).
---    Explanation: Content distribution algorithms are actively divorcing asset reach 
---                 from follower counts, allowing high-quality posts to go viral across the 
---                 platform regardless of account baseline scale.
---    Recommendation: Brand Strategy should shift ad spend away from fixed flat-fee 
---                    follower-based sponsorships toward performance-tier contracts 
---                    that pay creators based on actual interaction multipliers.
---
--- 3. EXECUTIVE FINDING: HIGH CONVERSION POTENTIAL FOR EMERGING CREATOR PROFILES
---    Observation: Official Creator accounts within the breakout list generate 
---                 19–21 interactions per follower, with the three highest-ranked 
---                 creator accounts posting multipliers of 21.00x, 19.00x, and 19.00x.
---    Explanation: Emerging professional creators with small follower footprints possess 
---                 exceptional engagement density but lack audience distribution support.
---    Recommendation: Talent Development should enroll these high-multiplier creators 
---                    into verification and audience-growth acceleration pipelines to 
---                    help them scale their follower base without diluting efficiency.
--- ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: PERSONAL PROFILES DOMINATE BREAKOUT EFFICIENCY
+   Observation: 80% of the qualifying breakout creators (n=12 out of 15) hold Personal account classifications, led by the top-ranked account (28.00x multiplier; 28 interactions across a single follower) and the second-ranked account (24.00x multiplier).
+
+   Explanation: Non-commercial, personal profiles often post hyper-authentic, highly relatable content that drives disproportionate viral engagement relative to their micro-audience size.
+
+   Recommendation: Creator Partnerships teams should expand influencer scouting beyond formal "Creator" account tags to include high-efficiency Personal profiles for hyper-cost-effective micro-sponsorships.
+
+2. EXECUTIVE FINDING: MASSIVE ENGAGEMENT OUTLIERS IN THE BOTTOM AUDIENCE TIERS
+   Observation: Every identified breakout user resides in the bottom 5th percentile for follower count (4.7th percentile; exactly 1 follower each) while ranking in the top 3.3% globally for total earned engagement (96.7th to 99.9th percentile).
+
+   Explanation: Content distribution algorithms are actively divorcing asset reach from follower counts, allowing high-quality posts to go viral across the platform regardless of account baseline scale.
+
+   Recommendation: Brand Strategy should shift ad spend away from fixed flat-fee follower-based sponsorships toward performance-tier contracts that pay creators based on actual interaction multipliers.
+
+3. EXECUTIVE FINDING: HIGH CONVERSION POTENTIAL FOR EMERGING CREATOR PROFILES
+   Observation: Official Creator accounts within the breakout list generate 19–21 interactions per follower, with the three highest-ranked creator accounts posting multipliers of 21.00x, 19.00x, and 19.00x.
+
+   Explanation: Emerging professional creators with small follower footprints possess exceptional engagement density but lack audience distribution support.
+
+   Recommendation: Talent Development should enroll these high-multiplier creators into verification and audience-growth acceleration pipelines to help them scale their follower base without diluting efficiency.
 
 -----------------------------------------------------------------------------
 
@@ -1621,38 +1479,26 @@ ORDER BY
 
 INSIGHTS:
 
--- ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: LATE-YEAR DECELERATION & PLATEAU ACROSS TOP-TIER HASHTAGS
---    Observation: By December 2023, four out of the top 5 trending hashtags (#agree, 
---                 #church, #economic, #very) ended the year in a "Plateaued Activity" 
---                 or "Decelerating Trend" state, with monthly application volumes 
---                 stagnating at low single-digit levels (1–4 uses/month).
---    Explanation: High-frequency evergreen tags naturally reach an equilibrium or 
---                 saturation point late in the year as creators diversify tagging 
---                 strategies toward seasonal and campaign-specific terms.
---    Recommendation: Content Operations should introduce quarterly hashtag refresh 
---                    playbooks to nudge creators toward emerging tags before core 
---                    platform tags enter prolonged plateau phases.
---
--- 2. EXECUTIVE FINDING: 'PER' DEMONSTRATES LATE-YEAR RESURGENCE & ACCELERATION MOMENTUM
---    Observation: #per stands out as the sole top hashtag closing Q4 with active positive 
---                 momentum ("Accelerating Trend" in Dec with +1 velocity change; 3 uses), 
---                 rebounding from an earlier drop in November.
---    Explanation: Multi-purpose functional terms experience periodic usage surges driven 
---                 by evolving content formats and shifting regional creator campaigns.
---    Recommendation: Product Development should leverage accelerating tags like #per 
---                    within auto-complete indexing algorithms to capture real-time 
---                    creator search intent.
---
--- 3. EXECUTIVE FINDING: EXTREME MID-YEAR LIFECYCLE VOLATILITY (#AGREE & #VERY)
---    Observation: Top tags display severe velocity shifts mid-year—e.g., #agree spiked 
---                 to 5 uses in July (+3 velocity) before dropping to a decelerating state 
---                 in September (-2 velocity), while #very collapsed from 5 uses in January 
---                 down to 1 use across mid-summer.
---    Explanation: Hashtag lifecycles on the platform are highly volatile, characterized 
---                 by short 1-to-2 month acceleration spikes followed by prolonged multi-month 
---                 deceleration periods.
---    Recommendation: Creator Marketing should design short-burst promotional campaigns 
---                    (30–45 days) that capitalize on rapid hashtag acceleration phases 
---                    rather than long-term sustained tag reliance.
+---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: LATE-YEAR DECELERATION & PLATEAU ACROSS TOP-TIER HASHTAGS
+   Observation: By December 2023, four out of the top 5 trending hashtags (#agree, #church, #economic, #very) ended the year in a "Plateaued Activity" or "Decelerating Trend" state, with monthly application volumes stagnating at low single-digit levels (1–4 uses/month).
+
+   Explanation: High-frequency evergreen tags naturally reach an equilibrium or saturation point late in the year as creators diversify tagging strategies toward seasonal and campaign-specific terms.
+
+   Recommendation: Content Operations should introduce quarterly hashtag refresh playbooks to nudge creators toward emerging tags before core platform tags enter prolonged plateau phases.
+
+2. EXECUTIVE FINDING: 'PER' DEMONSTRATES LATE-YEAR RESURGENCE & ACCELERATION MOMENTUM
+   Observation: #per stands out as the sole top hashtag closing Q4 with active positive momentum ("Accelerating Trend" in Dec with +1 velocity change; 3 uses), rebounding from an earlier drop in November.
+
+   Explanation: Multi-purpose functional terms experience periodic usage surges driven by evolving content formats and shifting regional creator campaigns.
+
+   Recommendation: Product Development should leverage accelerating tags like #per within auto-complete indexing algorithms to capture real-time creator search intent.
+
+3. EXECUTIVE FINDING: EXTREME MID-YEAR LIFECYCLE VOLATILITY (#AGREE & #VERY)
+   Observation: Top tags display severe velocity shifts mid-year—e.g., #agree spiked to 5 uses in July (+3 velocity) before dropping to a decelerating state in September (-2 velocity), while #very collapsed from 5 uses in January down to 1 use across mid-summer.
+
+   Explanation: Hashtag lifecycles on the platform are highly volatile, characterized by short 1-to-2 month acceleration spikes followed by prolonged multi-month deceleration periods.
+
+   Recommendation: Creator Marketing should design short-burst promotional campaigns (30–45 days) that capitalize on rapid hashtag acceleration phases rather than long-term sustained tag reliance.
 -- ---------------------------------------------------------------------------
