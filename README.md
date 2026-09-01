@@ -1,122 +1,122 @@
 # Social_Media_Analytics
 SQL Project
 
--- ==============================================================================
--- SOCIAL MEDIA ANALYTICS SCHEMA DOCUMENTATION
--- ==============================================================================
+==============================================================================
+**SOCIAL MEDIA ANALYTICS SCHEMA DOCUMENTATION**
+==============================================================================
 
--- ==============================================================================
--- 1. DIMENSION TABLES (Context & Entities)
--- ==============================================================================
+==============================================================================
+1. DIMENSION TABLES (Context & Entities)
+==============================================================================
 
--- ------------------------------------------------------------------------------
--- Table: dim_date
--- Purpose: Stores calendar context to group, slice, and filter metrics by day, week, month, quarter, or year without runtime date calculations.
--- ------------------------------------------------------------------------------
--- Columns:
--- date_key          : Integer primary key formatted as YYYYMMDD (e.g., 20260831). Joins directly to fact tables.
--- full_date         : Complete standard date value (YYYY-MM-DD) for display and standard calculations.
--- calendar_year     : Four-digit year number used for annual reporting.
--- calendar_quarter  : Quarter number (1 through 4) for quarterly performance tracking.
--- calendar_month    : Month number (1 through 12) for chronological ordering.
--- month_name        : Full English month name (e.g., August) for charts and dashboard labels.
--- day_of_month      : Day number within the month (1 through 31).
--- day_of_week       : Day number within the week (1 through 7).
--- day_name          : Full English day name (e.g., Monday) for day-of-week usage analysis.
--- is_weekend        : Indicator (true/false or 1/0) showing whether the date is a Saturday or Sunday.
-
-
--- ------------------------------------------------------------------------------
--- Table: dim_user
--- Purpose: Stores profile information and attributes of platform users who create posts or interact with content.
--- ------------------------------------------------------------------------------
--- Columns:
--- user_key          : Warehouse-managed surrogate key to uniquely identify user dimension records over time.
--- original_user_id  : Original business ID from the source system to trace back to source data.
--- username          : User handle or account name.
--- account_type      : Classification category of the account (e.g., Personal, Creator, Business).
--- is_verified       : Indicator showing if the account holds a verified status badge.
--- country           : Geographical country location linked to the user profile.
+------------------------------------------------------------------------------
+Table: dim_date
+Purpose: Stores calendar context to group, slice, and filter metrics by day, week, month, quarter, or year without runtime date calculations.
+------------------------------------------------------------------------------
+Columns:
+date_key          : Integer primary key formatted as YYYYMMDD (e.g., 20260831). Joins directly to fact tables.
+full_date         : Complete standard date value (YYYY-MM-DD) for display and standard calculations.
+calendar_year     : Four-digit year number used for annual reporting.
+calendar_quarter  : Quarter number (1 through 4) for quarterly performance tracking.
+calendar_month    : Month number (1 through 12) for chronological ordering.
+month_name        : Full English month name (e.g., August) for charts and dashboard labels.
+day_of_month      : Day number within the month (1 through 31).
+day_of_week       : Day number within the week (1 through 7).
+day_name          : Full English day name (e.g., Monday) for day-of-week usage analysis.
+is_weekend        : Indicator (true/false or 1/0) showing whether the date is a Saturday or Sunday.
 
 
--- ------------------------------------------------------------------------------
--- Table: dim_post
--- Purpose: Stores metadata, media attributes, and structural characteristics of published content.
--- ------------------------------------------------------------------------------
--- Columns:
--- post_key          : Warehouse-managed surrogate key uniquely identifying each content asset.
--- original_post_id  : Original business post ID from the source transactional system.
--- post_type         : Content format classification (e.g., Image, Carousel, Reel, Video).
--- media_url         : Web link pointing to the stored image or video file.
--- caption_length    : Total character count of the post caption text.
--- has_audio         : Indicator showing whether the post contains an active audio or music track.
+------------------------------------------------------------------------------
+Table: dim_user
+Purpose: Stores profile information and attributes of platform users who create posts or interact with content.
+------------------------------------------------------------------------------
+Columns:
+user_key          : Warehouse-managed surrogate key to uniquely identify user dimension records over time.
+original_user_id  : Original business ID from the source system to trace back to source data.
+username          : User handle or account name.
+account_type      : Classification category of the account (e.g., Personal, Creator, Business).
+is_verified       : Indicator showing if the account holds a verified status badge.
+country           : Geographical country location linked to the user profile.
 
 
--- ------------------------------------------------------------------------------
--- Table: dim_hashtag
--- Purpose: Stores unique hashtags and tags used across content on the platform.
--- ------------------------------------------------------------------------------
--- Columns:
--- hashtag_key       : Warehouse-managed surrogate key uniquely identifying each tag.
--- hashtag_text      : The actual string value of the hashtag without special characters (e.g., photography, travel).
+------------------------------------------------------------------------------
+Table: dim_post
+Purpose: Stores metadata, media attributes, and structural characteristics of published content.
+------------------------------------------------------------------------------
+Columns:
+post_key          : Warehouse-managed surrogate key uniquely identifying each content asset.
+original_post_id  : Original business post ID from the source transactional system.
+post_type         : Content format classification (e.g., Image, Carousel, Reel, Video).
+media_url         : Web link pointing to the stored image or video file.
+caption_length    : Total character count of the post caption text.
+has_audio         : Indicator showing whether the post contains an active audio or music track.
 
 
--- ==============================================================================
--- 2. FACT TABLES (Events & Metrics)
--- ==============================================================================
-
--- ------------------------------------------------------------------------------
--- Table: fact_post_creation
--- Purpose: Captures content publishing events, linking content creators to their posts and creation dates.
--- ------------------------------------------------------------------------------
--- Columns:
--- author_user_key   : References the user dimension record for the account that published the post.
--- post_key          : References the post dimension record for the created piece of content.
--- creation_date_key : References the date dimension record for the day the post was published.
--- post_count        : Additive metric (default value of 1) used to sum the total volume of published posts.
+------------------------------------------------------------------------------
+Table: dim_hashtag
+Purpose: Stores unique hashtags and tags used across content on the platform.
+------------------------------------------------------------------------------
+Columns:
+hashtag_key       : Warehouse-managed surrogate key uniquely identifying each tag.
+hashtag_text      : The actual string value of the hashtag without special characters (e.g., photography, travel).
 
 
--- ------------------------------------------------------------------------------
--- Table: fact_engagement
--- Purpose: Captures individual user interactions (likes, comments, shares) made on published content.
--- ------------------------------------------------------------------------------
--- Columns:
--- actor_user_key    : References the user dimension record for the person taking the action.
--- post_key          : References the post dimension record receiving the interaction.
--- interaction_date_key : References the date dimension record for when the action occurred.
--- interaction_type  : Categorization label for the action taken (e.g., Like, Comment, Share).
--- interaction_count : Additive metric (default value of 1) used to sum total interaction volume.
+==============================================================================
+2. FACT TABLES (Events & Metrics)
+==============================================================================
+
+------------------------------------------------------------------------------
+Table: fact_post_creation
+Purpose: Captures content publishing events, linking content creators to their posts and creation dates.
+------------------------------------------------------------------------------
+Columns:
+author_user_key   : References the user dimension record for the account that published the post.
+post_key          : References the post dimension record for the created piece of content.
+creation_date_key : References the date dimension record for the day the post was published.
+post_count        : Additive metric (default value of 1) used to sum the total volume of published posts.
 
 
--- ------------------------------------------------------------------------------
--- Table: fact_network
--- Purpose: Captures relationship changes (follows and unfollows) between users to track network growth over time.
--- ------------------------------------------------------------------------------
--- Columns:
--- follower_user_key : References the user dimension record for the person initiating the follow action.
--- followed_user_key : References the user dimension record for the person being followed.
--- action_date_key   : References the date dimension record for when the relationship change occurred.
--- network_action    : Classification label for the event type (e.g., Follow, Unfollow).
--- is_active_follow  : Numeric status flag (1 for active follow, 0 for unfollowed) used to calculate net active followers.
+------------------------------------------------------------------------------
+Table: fact_engagement
+Purpose: Captures individual user interactions (likes, comments, shares) made on published content.
+------------------------------------------------------------------------------
+Columns:
+actor_user_key    : References the user dimension record for the person taking the action.
+post_key          : References the post dimension record receiving the interaction.
+interaction_date_key : References the date dimension record for when the action occurred.
+interaction_type  : Categorization label for the action taken (e.g., Like, Comment, Share).
+interaction_count : Additive metric (default value of 1) used to sum total interaction volume.
 
 
--- ------------------------------------------------------------------------------
--- Table: fact_hashtag_usage
--- Purpose: Connects posts directly to the individual hashtags applied to them for topic and trend analysis.
--- ------------------------------------------------------------------------------
--- Columns:
--- post_key          : References the post dimension record containing the tag.
--- hashtag_key       : References the hashtag dimension record being applied.
--- usage_date_key    : References the date dimension record for when the tag was posted.
--- usage_count       : Additive metric (default value of 1) used to calculate total usage frequency per hashtag.
+------------------------------------------------------------------------------
+Table: fact_network
+Purpose: Captures relationship changes (follows and unfollows) between users to track network growth over time.
+------------------------------------------------------------------------------
+Columns:
+follower_user_key : References the user dimension record for the person initiating the follow action.
+followed_user_key : References the user dimension record for the person being followed.
+action_date_key   : References the date dimension record for when the relationship change occurred.
+network_action    : Classification label for the event type (e.g., Follow, Unfollow).
+is_active_follow  : Numeric status flag (1 for active follow, 0 for unfollowed) used to calculate net active followers.
 
--- ==============================================================================
--- SOCIAL MEDIA ANALYTICS SCHEMA (MYSQL VERSION)
--- ==============================================================================
 
--- ------------------------------------------------------------------------------
--- 1. DIMENSION TABLES (The Context)
--- ------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+Table: fact_hashtag_usage
+Purpose: Connects posts directly to the individual hashtags applied to them for topic and trend analysis.
+------------------------------------------------------------------------------
+Columns:
+post_key          : References the post dimension record containing the tag.
+hashtag_key       : References the hashtag dimension record being applied.
+usage_date_key    : References the date dimension record for when the tag was posted.
+usage_count       : Additive metric (default value of 1) used to calculate total usage frequency per hashtag.
+
+==============================================================================
+SOCIAL MEDIA ANALYTICS SCHEMA (MYSQL VERSION)
+==============================================================================
+
+------------------------------------------------------------------------------
+DIMENSION TABLES (The Context)
+------------------------------------------------------------------------------
 
 -- Calendar Dimension
 ```sql
@@ -167,9 +167,9 @@ CREATE TABLE dim_hashtag (
 ```
 
 
--- ------------------------------------------------------------------------------
--- 2. FACT TABLES (The Events & Metrics)
--- ------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+FACT TABLES (The Events & Metrics)
+------------------------------------------------------------------------------
 
 -- Post Creation Fact (Connects Author to Post)
 ```sql
@@ -228,9 +228,9 @@ CREATE TABLE fact_hashtag_usage (
 
 USE social_media;
 
--- ==============================================================================
--- 1. DIMENSION TABLES
--- ==============================================================================
+==============================================================================
+DIMENSION TABLES
+==============================================================================
 
 -- Calendar Dimension
 ```sql
@@ -273,8 +273,10 @@ IGNORE 1 LINES
 )
 SET 
     is_verified = IF(LOWER(@is_verified_var) IN ('true', '1'), 1, 0);
+```
 
 -- Post Dimension
+```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/dim_post.csv'
 INTO TABLE dim_post
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -307,9 +309,9 @@ IGNORE 1 LINES
 
 
 
--- ==============================================================================
--- 2. FACT TABLES
--- ==============================================================================
+==============================================================================
+FACT TABLES
+==============================================================================
 
 -- Post Creation Fact
 ```sql
@@ -374,32 +376,30 @@ IGNORE 1 LINES
 ```
 
 
--- =============================================================================
--- SOCIAL MEDIA ANALYTICS EXPLORATORY DATA ANALYSIS
--- =============================================================================
--- Database: MySQL 8.0
--- Purpose: Business-focused exploratory analysis for decision-making
--- Portfolio Project: Data Analyst
--- Note: All user-level references use the non-identifying surrogate key 
---       (user_id) from dim_user. No usernames or other personally 
---       identifiable information are queried or displayed.
--- =============================================================================
+=============================================================================
+SOCIAL MEDIA ANALYTICS EXPLORATORY DATA ANALYSIS
+=============================================================================
+Database: MySQL 8.0
+Purpose: Business-focused exploratory analysis for decision-making
+Portfolio Project: Data Analyst
+Note: All user-level references use the non-identifying surrogate key (user_id) from dim_user. No usernames or other personally identifiable information are queried or displayed.
+=============================================================================
 
--- =============================================================================
--- CATEGORY 1: CONTENT AND PUBLISHING PERFORMANCE
--- =============================================================================
+=============================================================================
+CONTENT AND PUBLISHING PERFORMANCE
+=============================================================================
 
--- -----------------------------------------------------------------------------
--- QUESTION 1
--- -----------------------------------------------------------------------------
--- INFO:
--- Content format strategy heavily dictates resource allocation. 
--- Decision-makers need to understand which content formats are being published most frequently and the current adoption rate of audio-enhanced content.
--- 
--- QUESTION:
--- What is the breakdown of content formats being published, and what percentage of total posts include an active audio track?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 1
+-----------------------------------------------------------------------------
+INFO:
+Content format strategy heavily dictates resource allocation. 
+Decision-makers need to understand which content formats are being published most frequently and the current adoption rate of audio-enhanced content.
+
+QUESTION:
+What is the breakdown of content formats being published, and what percentage of total posts include an active audio track?
+
+QUERY:
 ```sql
 SELECT
     post_type,
@@ -412,8 +412,8 @@ GROUP BY post_type
 ORDER BY total_posts_published DESC;
 ```
 
--- INSIGHTS:
--- ---------------------------------------------------------------------------
+INSIGHTS:
+---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: STATIC & CAROUSEL AUDIO ADOPTION IS STALLED AT ~50%
 --    Observation: Images (40.77%, n=2,446) and carousels (20.10%, n=1,206)
 --                 together comprise 60.87% of published content, but audio adoption
@@ -438,18 +438,16 @@ ORDER BY total_posts_published DESC;
 --                    definitions to consolidate legacy Video under the Reel classification.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 2
--- -----------------------------------------------------------------------------
--- INFO:
--- Understanding content velocity over time helps marketing and operational 
--- teams anticipate peak platform activity and plan strategic campaigns.
--- 
--- QUESTION:
--- How does the overall volume of published content fluctuate across 
--- different months and quarters of the year?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 2
+-----------------------------------------------------------------------------
+INFO:
+Understanding content velocity over time helps marketing and operational teams anticipate peak platform activity and plan strategic campaigns.
+
+QUESTION:
+How does the overall volume of published content fluctuate across different months and quarters of the year?
+
+QUERY:
 ```sql
 WITH monthly_totals AS (
     SELECT
@@ -518,18 +516,16 @@ ORDER BY
 --                    setting a 10% volume growth target for the low-velocity winter months.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 3
--- -----------------------------------------------------------------------------
--- INFO:
--- Scheduling and automated publishing tools depend on knowing when users 
--- are historically most active in generating content.
--- 
--- QUESTION:
--- Is there a significant difference in daily publishing volume when comparing 
--- weekdays to weekends?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 3
+-----------------------------------------------------------------------------
+INFO:
+Scheduling and automated publishing tools depend on knowing when users are historically most active in generating content.
+
+QUESTION:
+Is there a significant difference in daily publishing volume when comparing weekdays to weekends?
+
+QUERY:
 ```sql
 WITH day_type_summary AS (
     SELECT
@@ -578,18 +574,16 @@ ORDER BY avg_posts_per_day DESC;
 --                 aggregates to prevent misinterpretation of user activity levels.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 4
--- -----------------------------------------------------------------------------
--- INFO:
--- Copywriting efforts vary widely by content format. Understanding baseline 
--- caption behavior helps establish best practices for content creators.
--- 
--- QUESTION:
--- How does caption length distribute across different content types, and are 
--- certain formats consistently more text-heavy than others?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 4
+-----------------------------------------------------------------------------
+INFO:
+Copywriting efforts vary widely by content format. Understanding baseline caption behavior helps establish best practices for content creators.
+
+QUESTION:
+How does caption length distribute across different content types, and are certain formats consistently more text-heavy than others?
+
+QUERY:
 ```sql
 SELECT
     post_type,
@@ -627,23 +621,20 @@ ORDER BY avg_caption_length DESC;
 -- ---------------------------------------------------------------------------
 
 
--- =============================================================================
--- CATEGORY 2: ENGAGEMENT AND AUDIENCE BEHAVIOR
--- =============================================================================
+=============================================================================
+ENGAGEMENT AND AUDIENCE BEHAVIOR
+=============================================================================
 
--- -----------------------------------------------------------------------------
--- QUESTION 5
--- -----------------------------------------------------------------------------
--- INFO:
--- Not all published content drives equivalent engagement. Identifying the 
--- formats that yield the highest return on interaction informs future 
--- content production investments.
--- 
--- QUESTION:
--- Which specific content formats generate the highest average engagement 
--- volume per individual post?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 5
+-----------------------------------------------------------------------------
+INFO:
+Not all published content drives equivalent engagement. Identifying the formats that yield the highest return on interaction informs future content production investments.
+
+QUESTION:
+Which specific content formats generate the highest average engagement volume per individual post?
+
+QUERY:
 ```sql
 WITH format_engagement AS (
     SELECT
@@ -706,18 +697,16 @@ ORDER BY avg_engagement_per_post DESC;
 --                    dwell time into active interaction counts.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 6
--- -----------------------------------------------------------------------------
--- INFO:
--- Recognizing highly active unverified users ("super-fans" or emerging creators) 
--- is essential for community management, ambassadorship programs, and retention.
--- 
--- QUESTION:
--- Who are the top 10 most actively engaging non-verified users on the platform 
--- based on total interaction volume?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 6
+-----------------------------------------------------------------------------
+INFO:
+Recognizing highly active unverified users ("super-fans" or emerging creators) is essential for community management, ambassadorship programs, and retention.
+ 
+ QUESTION:
+ Who are the top 10 most actively engaging non-verified users on the platform based on total interaction volume?
+
+QUERY:
 ```sql
 WITH top_unverified_users AS (
     SELECT
@@ -784,18 +773,16 @@ ORDER BY total_interactions_made DESC;
 --                    high-frequency power users.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 7
--- -----------------------------------------------------------------------------
--- INFO:
--- Audio integration can shift how users interact with content (e.g., more 
--- passive viewing vs. active commenting).
--- 
--- QUESTION:
--- What proportion of overall platform interactions do likes, comments, and shares 
--- represent when comparing posts with audio against posts without audio?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 7
+-----------------------------------------------------------------------------
+INFO:
+Audio integration can shift how users interact with content (e.g., more passive viewing vs. active commenting).
+
+QUESTION:
+What proportion of overall platform interactions do likes, comments, and shares represent when comparing posts with audio against posts without audio?
+
+QUERY:
 ```sql
 WITH interaction_breakdown AS (
     SELECT
@@ -847,18 +834,16 @@ ORDER BY audio_status, interaction_volume DESC;
 --                    to static posts to elevate baseline shareability and viral reach.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 8
--- -----------------------------------------------------------------------------
--- INFO:
--- Spikes in daily engagement dictate when community managers should be most 
--- active and when infrastructure loads are heaviest.
--- 
--- QUESTION:
--- Which specific days of the week consistently experience user engagement 
--- volumes that exceed the daily platform average?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 8
+-----------------------------------------------------------------------------
+INFO:
+Spikes in daily engagement dictate when community managers should be most active and when infrastructure loads are heaviest.
+
+QUESTION:
+Which specific days of the week consistently experience user engagement volumes that exceed the daily platform average?
+
+QUERY:
 ```sql
 SELECT
     d.day_name,
@@ -904,23 +889,20 @@ ORDER BY avg_daily_volume DESC;
 -- ---------------------------------------------------------------------------
 
 
--- =============================================================================
--- CATEGORY 3: USER, ACCOUNT, AND NETWORK GROWTH
--- =============================================================================
+=============================================================================
+USER, ACCOUNT, AND NETWORK GROWTH
+=============================================================================
 
--- -----------------------------------------------------------------------------
--- QUESTION 9
--- -----------------------------------------------------------------------------
--- INFO:
--- The follower-to-following ratio is a primary indicator of account influence 
--- and audience dynamic. Variations across account types highlight differing 
--- platform usage strategies.
--- 
--- QUESTION:
--- What is the aggregate ratio of followers to following for different 
--- account types (Personal, Creator, Business)?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 9
+-----------------------------------------------------------------------------
+INFO:
+The follower-to-following ratio is a primary indicator of account influence and audience dynamic. Variations across account types highlight differing platform usage strategies.
+
+QUESTION:
+What is the aggregate ratio of followers to following for different account types (Personal, Creator, Business)?
+
+QUERY:
 ```sql
 WITH follower_metrics AS (
     SELECT followed_user_key AS user_key, SUM(is_active_follow) AS total_followers
@@ -985,19 +967,16 @@ ORDER BY follower_to_following_ratio DESC;
 --                    profile views into net follower growth.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 10
--- -----------------------------------------------------------------------------
--- INFO:
--- Regional platform health requires a balance between content creation and 
--- consumption. Markets with high engagement but low creation may represent 
--- strategic expansion opportunities.
--- 
--- QUESTION:
--- How does the ratio of user engagement to content creation vary across 
--- different geographic regions (countries)?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 10
+-----------------------------------------------------------------------------
+INFO:
+Regional platform health requires a balance between content creation and consumption. Markets with high engagement but low creation may represent strategic expansion opportunities.
+ 
+ QUESTION:
+ How does the ratio of user engagement to content creation vary across different geographic regions (countries)?
+
+QUERY:
 ```sql
 WITH creator_activity AS (
     SELECT author_user_key AS user_key, SUM(post_count) AS total_posts_created
@@ -1059,18 +1038,16 @@ ORDER BY engagement_to_creation_ratio DESC;
 --                    is effectively served to relevant target audiences.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 11
--- -----------------------------------------------------------------------------
--- INFO:
--- Verification badges are intended to signal trust. Measuring whether verified 
--- accounts actually experience lower audience churn validates this assumption.
--- 
--- QUESTION:
--- How does the verification status of an account impact its ability to attract 
--- active followers and its historical follower churn rate?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 11
+-----------------------------------------------------------------------------
+INFO:
+Verification badges are intended to signal trust. Measuring whether verified accounts actually experience lower audience churn validates this assumption.
+
+QUESTION:
+How does the verification status of an account impact its ability to attract active followers and its historical follower churn rate?
+
+QUERY:
 ```sql
 WITH network_flows AS (
     SELECT
@@ -1131,19 +1108,16 @@ ORDER BY avg_active_followers_per_account DESC;
 --                    stable unverified user circles.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 12
--- -----------------------------------------------------------------------------
--- INFO:
--- Overall network health is measured by the continuous addition of net-new 
--- social connections. Tracking this sequentially alerts leadership to 
--- accelerating growth or structural plateaus.
--- 
--- QUESTION:
--- What is the month-over-month trajectory of net-new active follow relationships 
--- established across the entire platform?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 12
+-----------------------------------------------------------------------------
+INFO:
+Overall network health is measured by the continuous addition of net-new social connections. Tracking this sequentially alerts leadership to accelerating growth or structural plateaus.
+
+QUESTION:
+What is the month-over-month trajectory of net-new active follow relationships established across the entire platform?
+
+QUERY:
 ```sql
 WITH monthly_aggregation AS (
     SELECT
@@ -1212,23 +1186,20 @@ ORDER BY
 -- ---------------------------------------------------------------------------
 
 
--- =============================================================================
--- CATEGORY 4: HASHTAG, TREND, AND STRATEGIC GROWTH OPPORTUNITIES
--- =============================================================================
+=============================================================================
+HASHTAG, TREND, AND STRATEGIC GROWTH OPPORTUNITIES
+=============================================================================
 
--- -----------------------------------------------------------------------------
--- QUESTION 13
--- -----------------------------------------------------------------------------
--- INFO:
--- High-volume usage doesn't always guarantee high engagement. Identifying tags 
--- that punch above their weight class provides actionable recommendations for 
--- content optimization.
--- 
--- QUESTION:
--- Which highly utilized hashtags are driving the most significant engagement, 
--- and how do they rank against their peers in the top usage quartile?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 13
+-----------------------------------------------------------------------------
+INFO:
+High-volume usage doesn't always guarantee high engagement. Identifying tags that punch above their weight class provides actionable recommendations for content optimization.
+
+QUESTION:
+Which highly utilized hashtags are driving the most significant engagement, and how do they rank against their peers in the top usage quartile?
+
+QUERY:
 ```sql
 WITH hashtag_base_metrics AS (
     SELECT
@@ -1292,18 +1263,16 @@ LIMIT 15;
 --                    with niche, high-intent micro-hashtags.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 14
--- -----------------------------------------------------------------------------
--- INFO:
--- Daily fluctuations can hide macro-trends. Applying a rolling average smooths 
--- out the noise, making true engagement momentum and viral spikes clearly visible.
--- 
--- QUESTION:
--- What is the rolling 7-day average of platform-wide interactions, and how does 
--- daily performance deviate from this trend line?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 14
+-----------------------------------------------------------------------------
+INFO:
+Daily fluctuations can hide macro-trends. Applying a rolling average smooths out the noise, making true engagement momentum and viral spikes clearly visible.
+
+QUESTION:
+What is the rolling 7-day average of platform-wide interactions, and how does daily performance deviate from this trend line?
+
+QUERY:
 ```sql
 WITH daily_platform_engagement AS (
     SELECT
@@ -1389,19 +1358,16 @@ ORDER BY full_date DESC;
 --                    capture predictable positive momentum shifts above the rolling average.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 15
--- -----------------------------------------------------------------------------
--- INFO:
--- Sponsoring massive accounts is expensive. Finding "breakout creators" who 
--- command massive engagement relative to their small follower counts highlights 
--- underpriced partnership opportunities.
--- 
--- QUESTION:
--- Which users qualify as "breakout creators"—those who rank in the top 20% for 
--- content engagement but remain in the bottom 50% for total audience size?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 15
+-----------------------------------------------------------------------------
+INFO:
+Sponsoring massive accounts is expensive. Finding "breakout creators" who command massive engagement relative to their small follower counts highlights underpriced partnership opportunities.
+
+QUESTION:
+Which users qualify as "breakout creators"—those who rank in the top 20% for content engagement but remain in the bottom 50% for total audience size?
+
+QUERY:
 ```sql
 WITH user_audience_size AS (
     SELECT followed_user_key AS user_key, SUM(is_active_follow) AS current_followers
@@ -1493,18 +1459,16 @@ ORDER BY interaction_to_follower_multiplier DESC;
 --                    help them scale their follower base without diluting efficiency.
 -- ---------------------------------------------------------------------------
 
--- -----------------------------------------------------------------------------
--- QUESTION 16
--- -----------------------------------------------------------------------------
--- INFO:
--- A tag may be popular overall, but its relevance could be fading. Tracking the 
--- cumulative buildup and monthly velocity of top tags reveals strategic lifecycles.
--- 
--- QUESTION:
--- How does the cumulative usage of the top 5 trending hashtags evolve over time, 
--- and are they currently accelerating or decelerating in popularity?
--- 
--- QUERY:
+-----------------------------------------------------------------------------
+QUESTION 16
+-----------------------------------------------------------------------------
+INFO:
+A tag may be popular overall, but its relevance could be fading. Tracking the cumulative buildup and monthly velocity of top tags reveals strategic lifecycles.
+
+QUESTION:
+How does the cumulative usage of the top 5 trending hashtags evolve over time, and are they currently accelerating or decelerating in popularity?
+
+QUERY:
 ```sql
 WITH top_platform_hashtags AS (
     SELECT hashtag_key
