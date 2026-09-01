@@ -11,8 +11,7 @@ SQL Project
 
 -- ------------------------------------------------------------------------------
 -- Table: dim_date
--- Purpose: Stores calendar context to group, slice, and filter metrics by day, 
---          week, month, quarter, or year without runtime date calculations.
+-- Purpose: Stores calendar context to group, slice, and filter metrics by day, week, month, quarter, or year without runtime date calculations.
 -- ------------------------------------------------------------------------------
 -- Columns:
 -- date_key          : Integer primary key formatted as YYYYMMDD (e.g., 20260831). Joins directly to fact tables.
@@ -29,8 +28,7 @@ SQL Project
 
 -- ------------------------------------------------------------------------------
 -- Table: dim_user
--- Purpose: Stores profile information and attributes of platform users who create 
---          posts or interact with content.
+-- Purpose: Stores profile information and attributes of platform users who create posts or interact with content.
 -- ------------------------------------------------------------------------------
 -- Columns:
 -- user_key          : Warehouse-managed surrogate key to uniquely identify user dimension records over time.
@@ -43,8 +41,7 @@ SQL Project
 
 -- ------------------------------------------------------------------------------
 -- Table: dim_post
--- Purpose: Stores metadata, media attributes, and structural characteristics of 
---          published content.
+-- Purpose: Stores metadata, media attributes, and structural characteristics of published content.
 -- ------------------------------------------------------------------------------
 -- Columns:
 -- post_key          : Warehouse-managed surrogate key uniquely identifying each content asset.
@@ -70,8 +67,7 @@ SQL Project
 
 -- ------------------------------------------------------------------------------
 -- Table: fact_post_creation
--- Purpose: Captures content publishing events, linking content creators to their 
---          posts and creation dates.
+-- Purpose: Captures content publishing events, linking content creators to their posts and creation dates.
 -- ------------------------------------------------------------------------------
 -- Columns:
 -- author_user_key   : References the user dimension record for the account that published the post.
@@ -82,8 +78,7 @@ SQL Project
 
 -- ------------------------------------------------------------------------------
 -- Table: fact_engagement
--- Purpose: Captures individual user interactions (likes, comments, shares) made 
---          on published content.
+-- Purpose: Captures individual user interactions (likes, comments, shares) made on published content.
 -- ------------------------------------------------------------------------------
 -- Columns:
 -- actor_user_key    : References the user dimension record for the person taking the action.
@@ -95,8 +90,7 @@ SQL Project
 
 -- ------------------------------------------------------------------------------
 -- Table: fact_network
--- Purpose: Captures relationship changes (follows and unfollows) between users to 
---          track network growth over time.
+-- Purpose: Captures relationship changes (follows and unfollows) between users to track network growth over time.
 -- ------------------------------------------------------------------------------
 -- Columns:
 -- follower_user_key : References the user dimension record for the person initiating the follow action.
@@ -108,8 +102,7 @@ SQL Project
 
 -- ------------------------------------------------------------------------------
 -- Table: fact_hashtag_usage
--- Purpose: Connects posts directly to the individual hashtags applied to them 
---          for topic and trend analysis.
+-- Purpose: Connects posts directly to the individual hashtags applied to them for topic and trend analysis.
 -- ------------------------------------------------------------------------------
 -- Columns:
 -- post_key          : References the post dimension record containing the tag.
@@ -126,6 +119,7 @@ SQL Project
 -- ------------------------------------------------------------------------------
 
 -- Calendar Dimension
+```sql
 CREATE TABLE dim_date (
     date_key INT PRIMARY KEY, -- Format: YYYYMMDD (e.g., 20231025)
     full_date DATE NOT NULL,
@@ -138,8 +132,10 @@ CREATE TABLE dim_date (
     day_name VARCHAR(20),
     is_weekend BOOLEAN
 );
+```
 
 -- User Dimension
+```sql
 CREATE TABLE dim_user (
     user_key INT AUTO_INCREMENT PRIMARY KEY, -- Surrogate Key
     original_user_id VARCHAR(50) NOT NULL,   -- Business Key (from OLTP)
@@ -148,8 +144,10 @@ CREATE TABLE dim_user (
     is_verified BOOLEAN,
     country VARCHAR(50)
 );
+```
 
 -- Post Dimension
+```sql
 CREATE TABLE dim_post (
     post_key INT AUTO_INCREMENT PRIMARY KEY, -- Surrogate Key
     original_post_id VARCHAR(50) NOT NULL,   -- Business Key (from OLTP)
@@ -158,12 +156,15 @@ CREATE TABLE dim_post (
     caption_length INT,
     has_audio BOOLEAN
 );
+```
 
 -- Hashtag Dimension
+```sql
 CREATE TABLE dim_hashtag (
     hashtag_key INT AUTO_INCREMENT PRIMARY KEY, -- Surrogate Key
     hashtag_text VARCHAR(100) UNIQUE
 );
+```
 
 
 -- ------------------------------------------------------------------------------
@@ -171,6 +172,7 @@ CREATE TABLE dim_hashtag (
 -- ------------------------------------------------------------------------------
 
 -- Post Creation Fact (Connects Author to Post)
+```sql
 CREATE TABLE fact_post_creation (
     author_user_key INT,
     post_key INT,
@@ -180,8 +182,10 @@ CREATE TABLE fact_post_creation (
     FOREIGN KEY (post_key) REFERENCES dim_post(post_key),
     FOREIGN KEY (creation_date_key) REFERENCES dim_date(date_key)
 );
+```
 
 -- Engagement Fact (Likes, Comments, Shares)
+```sql
 CREATE TABLE fact_engagement (
     actor_user_key INT,
     post_key INT,
@@ -192,8 +196,10 @@ CREATE TABLE fact_engagement (
     FOREIGN KEY (post_key) REFERENCES dim_post(post_key),
     FOREIGN KEY (interaction_date_key) REFERENCES dim_date(date_key)
 );
+```
 
 -- Follower Network Fact (Followers & Following)
+```
 CREATE TABLE fact_network (
     follower_user_key INT,
     followed_user_key INT,
@@ -204,8 +210,10 @@ CREATE TABLE fact_network (
     FOREIGN KEY (followed_user_key) REFERENCES dim_user(user_key),
     FOREIGN KEY (action_date_key) REFERENCES dim_date(date_key)
 );
+```
 
 -- Hashtag Usage Fact (Bridge Fact for Posts and Hashtags)
+```sql
 CREATE TABLE fact_hashtag_usage (
     post_key INT,
     hashtag_key INT,
@@ -215,6 +223,7 @@ CREATE TABLE fact_hashtag_usage (
     FOREIGN KEY (hashtag_key) REFERENCES dim_hashtag(hashtag_key),
     FOREIGN KEY (usage_date_key) REFERENCES dim_date(date_key)
 );
+```
 
 
 USE social_media;
@@ -224,6 +233,7 @@ USE social_media;
 -- ==============================================================================
 
 -- Calendar Dimension
+```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/dim_date.csv'
 INTO TABLE dim_date
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -244,8 +254,10 @@ IGNORE 1 LINES
 SET 
     full_date = STR_TO_DATE(@full_date_var, '%Y-%m-%d'),
     is_weekend = IF(LOWER(@is_weekend_var) IN ('true', '1'), 1, 0);
+```
 
 -- User Dimension
+```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/dim_user.csv'
 INTO TABLE dim_user
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -278,8 +290,10 @@ IGNORE 1 LINES
 )
 SET 
     has_audio = IF(LOWER(@has_audio_var) IN ('true', '1'), 1, 0);
+```
 
 -- Hashtag Dimension
+```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/dim_hashtag.csv'
 INTO TABLE dim_hashtag
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -289,6 +303,7 @@ IGNORE 1 LINES
     hashtag_key,
     hashtag_text
 );
+```
 
 
 
@@ -297,6 +312,7 @@ IGNORE 1 LINES
 -- ==============================================================================
 
 -- Post Creation Fact
+```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/fact_post_creation.csv'
 INTO TABLE fact_post_creation
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -308,8 +324,10 @@ IGNORE 1 LINES
     creation_date_key,
     post_count
 );
+```
 
 -- Engagement Fact
+```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/fact_engagement.csv'
 INTO TABLE fact_engagement
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -322,8 +340,10 @@ IGNORE 1 LINES
     interaction_type,
     interaction_count
 );
+```
 
 -- Follower Network Fact
+```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/fact_network.csv'
 INTO TABLE fact_network
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -336,8 +356,10 @@ IGNORE 1 LINES
     network_action,
     is_active_follow
 );
+```
 
 -- Hashtag Usage Fact
+```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/fact_hashtag_usage.csv'
 INTO TABLE fact_hashtag_usage
 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
@@ -349,6 +371,7 @@ IGNORE 1 LINES
     usage_date_key,
     usage_count
 );
+```
 
 
 -- =============================================================================
@@ -377,6 +400,7 @@ IGNORE 1 LINES
 -- What is the breakdown of content formats being published, and what percentage of total posts include an active audio track?
 -- 
 -- QUERY:
+```sql
 SELECT
     post_type,
     COUNT(post_key) AS total_posts_published,
@@ -386,6 +410,7 @@ SELECT
 FROM dim_post
 GROUP BY post_type
 ORDER BY total_posts_published DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -425,6 +450,7 @@ ORDER BY total_posts_published DESC;
 -- different months and quarters of the year?
 -- 
 -- QUERY:
+```sql
 WITH monthly_totals AS (
     SELECT
         d.calendar_year,
@@ -457,6 +483,7 @@ FROM monthly_totals
 ORDER BY 
     calendar_year, 
     calendar_month;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -503,6 +530,7 @@ ORDER BY
 -- weekdays to weekends?
 -- 
 -- QUERY:
+```sql
 WITH day_type_summary AS (
     SELECT
         CASE WHEN d.is_weekend = 1 THEN 'Weekend' ELSE 'Weekday' END AS weekly_classification,
@@ -522,6 +550,7 @@ SELECT
     ROUND(aggregate_posts / total_days_in_period, 2) AS avg_posts_per_day
 FROM day_type_summary
 ORDER BY avg_posts_per_day DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -561,6 +590,7 @@ ORDER BY avg_posts_per_day DESC;
 -- certain formats consistently more text-heavy than others?
 -- 
 -- QUERY:
+```sql
 SELECT
     post_type,
     MIN(caption_length) AS shortest_caption_chars,
@@ -569,6 +599,7 @@ SELECT
 FROM dim_post
 GROUP BY post_type
 ORDER BY avg_caption_length DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -613,6 +644,7 @@ ORDER BY avg_caption_length DESC;
 -- volume per individual post?
 -- 
 -- QUERY:
+```sql
 WITH format_engagement AS (
     SELECT
         p.post_type,
@@ -638,6 +670,7 @@ SELECT
         / (SUM(platform_total_engagement) OVER () / SUM(total_unique_posts) OVER ()) * 100 - 100, 2) AS pct_vs_platform_avg
 FROM format_engagement
 ORDER BY avg_engagement_per_post DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -685,6 +718,7 @@ ORDER BY avg_engagement_per_post DESC;
 -- based on total interaction volume?
 -- 
 -- QUERY:
+```sql
 WITH top_unverified_users AS (
     SELECT
         u.user_key AS user_id,
@@ -713,6 +747,7 @@ SELECT
         / COUNT(*) OVER () * 100, 1) AS pct_personal_accounts
 FROM top_unverified_users
 ORDER BY total_interactions_made DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -761,6 +796,7 @@ ORDER BY total_interactions_made DESC;
 -- represent when comparing posts with audio against posts without audio?
 -- 
 -- QUERY:
+```sql
 WITH interaction_breakdown AS (
     SELECT
         CASE WHEN p.has_audio = 1 THEN 'Contains Audio' ELSE 'No Audio' END AS audio_status,
@@ -780,6 +816,7 @@ SELECT
         / SUM(interaction_volume) OVER () * 100, 2) AS audio_status_pct_of_platform_total
 FROM interaction_breakdown
 ORDER BY audio_status, interaction_volume DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -822,6 +859,7 @@ ORDER BY audio_status, interaction_volume DESC;
 -- volumes that exceed the daily platform average?
 -- 
 -- QUERY:
+```sql
 SELECT
     d.day_name,
     COUNT(DISTINCT d.date_key) AS occurrences_in_dataset,
@@ -836,6 +874,7 @@ HAVING SUM(e.interaction_count) / COUNT(DISTINCT d.date_key) > (
     FROM fact_engagement
 )
 ORDER BY avg_daily_volume DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -882,6 +921,7 @@ ORDER BY avg_daily_volume DESC;
 -- account types (Personal, Creator, Business)?
 -- 
 -- QUERY:
+```sql
 WITH follower_metrics AS (
     SELECT followed_user_key AS user_key, SUM(is_active_follow) AS total_followers
     FROM fact_network
@@ -911,6 +951,7 @@ SELECT
     ROUND(aggregate_followers / NULLIF(aggregate_following, 0), 2) AS follower_to_following_ratio
 FROM followers_by_type
 ORDER BY follower_to_following_ratio DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -957,6 +998,7 @@ ORDER BY follower_to_following_ratio DESC;
 -- different geographic regions (countries)?
 -- 
 -- QUERY:
+```sql
 WITH creator_activity AS (
     SELECT author_user_key AS user_key, SUM(post_count) AS total_posts_created
     FROM fact_post_creation
@@ -978,6 +1020,7 @@ LEFT JOIN creator_activity ca ON u.user_key = ca.user_key
 LEFT JOIN engagement_activity ea ON u.user_key = ea.user_key
 GROUP BY u.country
 ORDER BY engagement_to_creation_ratio DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -1028,6 +1071,7 @@ ORDER BY engagement_to_creation_ratio DESC;
 -- active followers and its historical follower churn rate?
 -- 
 -- QUERY:
+```sql
 WITH network_flows AS (
     SELECT
         followed_user_key AS user_key,
@@ -1057,6 +1101,7 @@ SELECT
     network_churn_percentage
 FROM verification_summary
 ORDER BY avg_active_followers_per_account DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -1099,6 +1144,7 @@ ORDER BY avg_active_followers_per_account DESC;
 -- established across the entire platform?
 -- 
 -- QUERY:
+```sql
 WITH monthly_aggregation AS (
     SELECT
         d.calendar_year,
@@ -1129,6 +1175,7 @@ LEFT JOIN monthly_aggregation prev
 ORDER BY 
     curr.calendar_year, 
     curr.calendar_month;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -1182,6 +1229,7 @@ ORDER BY
 -- and how do they rank against their peers in the top usage quartile?
 -- 
 -- QUERY:
+```sql
 WITH hashtag_base_metrics AS (
     SELECT
         hu.hashtag_key,
@@ -1213,6 +1261,7 @@ FROM ranked_hashtag_performance
 WHERE overall_usage_quartile = 1
 ORDER BY platform_engagement_rank
 LIMIT 15;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -1255,6 +1304,7 @@ LIMIT 15;
 -- daily performance deviate from this trend line?
 -- 
 -- QUERY:
+```sql
 WITH daily_platform_engagement AS (
     SELECT
         d.full_date,
@@ -1300,6 +1350,7 @@ SELECT
         / COUNT(*) OVER () * 100, 1) AS pct_stable_baseline
 FROM trailing_30d_sample
 ORDER BY full_date DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -1351,6 +1402,7 @@ ORDER BY full_date DESC;
 -- content engagement but remain in the bottom 50% for total audience size?
 -- 
 -- QUERY:
+```sql
 WITH user_audience_size AS (
     SELECT followed_user_key AS user_key, SUM(is_active_follow) AS current_followers
     FROM fact_network
@@ -1403,6 +1455,7 @@ SELECT
         / COUNT(*) OVER () * 100, 1) AS pct_personal_accounts
 FROM breakout_creators
 ORDER BY interaction_to_follower_multiplier DESC;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
@@ -1452,6 +1505,7 @@ ORDER BY interaction_to_follower_multiplier DESC;
 -- and are they currently accelerating or decelerating in popularity?
 -- 
 -- QUERY:
+```sql
 WITH top_platform_hashtags AS (
     SELECT hashtag_key
     FROM fact_hashtag_usage
@@ -1512,6 +1566,7 @@ ORDER BY
     h.hashtag_text, 
     htm.calendar_year, 
     htm.calendar_month;
+```
 
 -- INSIGHTS:
 -- ---------------------------------------------------------------------------
