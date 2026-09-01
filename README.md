@@ -1,6 +1,6 @@
 # Social_Media_Analytics
 
-SQL Project
+SQL Project  
 
 ------------------------------------------------------------------------------
 
@@ -456,29 +456,18 @@ ORDER BY total_posts_published DESC;
 INSIGHTS:
 
 ---------------------------------------------------------------------------
--- 1. EXECUTIVE FINDING: STATIC & CAROUSEL AUDIO ADOPTION IS STALLED AT ~50%
---    Observation: Images (40.77%, n=2,446) and carousels (20.10%, n=1,206)
---                 together comprise 60.87% of published content, but audio adoption
---                 for both formats is stalled near 50% (49.14% and 50.91% 
---                 respectively), versus 100% adoption on video formats.
---    Explanation: Unlike video formats that require sound, half of non-video posts
---                 lack audio metadata, which reduces their reach in sound-driven
---                 discovery feeds and leaves session-length benefits (e.g., on
---                 swipeable carousels) only partially captured.
---    Recommendation: Product Operations should deploy smart audio prompts during
---                    the upload flow, paired with targeted creator education, to 
---                    raise non-video audio adoption toward 75%+.
---
--- 2. EXECUTIVE FINDING: VIDEO CATEGORY ALIGNMENT & REPORTING SIMPLIFICATION
---    Observation: Video inventory is split between legacy Video (9.45%, n=567) 
---                 and Reel (29.68%, n=1,781), despite both displaying identical
---                 100% audio usage rates.
---    Explanation: Maintaining duplicate video categories creates inconsistencies
---                 in executive performance dashboards, distorts content trend
---                 analysis, and increases administrative reporting overhead.
---    Recommendation: Operations and Business Analytics should standardize content
---                    definitions to consolidate legacy Video under the Reel classification.
--- ---------------------------------------------------------------------------
+
+1. EXECUTIVE FINDING: STATIC & CAROUSEL AUDIO ADOPTION IS STALLED AT ~50%
+   Observation: Images (40.77%, n=2,446) and carousels (20.10%, n=1,206) together comprise 60.87% of published content, but audio adoption for both formats is stalled near 50% (49.14% and 50.91% respectively), versus 100% adoption on video formats.
+
+   Explanation: Unlike video formats that require sound, half of non-video posts lack audio metadata, which reduces their reach in sound-driven discovery feeds and leaves session-length benefits (e.g., on swipeable carousels) only partially captured.
+
+   Recommendation: Product Operations should deploy smart audio prompts during the upload flow, paired with targeted creator education, to raise non-video audio adoption toward 75%+.
+
+2. EXECUTIVE FINDING: VIDEO CATEGORY ALIGNMENT & REPORTING SIMPLIFICATION
+   Observation: Video inventory is split between legacy Video (9.45%, n=567) and Reel (29.68%, n=1,781), despite both displaying identical 100% audio usage rates.
+   Explanation: Maintaining duplicate video categories creates inconsistencies in executive performance dashboards, distorts content trend analysis, and increases administrative reporting overhead.
+   Recommendation: Operations and Business Analytics should standardize content definitions to consolidate legacy Video under the Reel classification.
 
 -----------------------------------------------------------------------------
 
