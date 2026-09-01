@@ -15,6 +15,7 @@ Table: dim_date
 Purpose: Stores calendar context to group, slice, and filter metrics by day, week, month, quarter, or year without runtime date calculations.  
 
 ------------------------------------------------------------------------------
+```text
 Columns:  
 date_key          : Integer primary key formatted as YYYYMMDD (e.g., 20260831). Joins directly to fact tables.  
 full_date         : Complete standard date value (YYYY-MM-DD) for display and standard calculations.  
@@ -26,7 +27,7 @@ day_of_month      : Day number within the month (1 through 31).
 day_of_week       : Day number within the week (1 through 7).  
 day_name          : Full English day name (e.g., Monday) for day-of-week usage analysis.  
 is_weekend        : Indicator (true/false or 1/0) showing whether the date is a Saturday or Sunday.
-
+```
 
 
 ------------------------------------------------------------------------------
