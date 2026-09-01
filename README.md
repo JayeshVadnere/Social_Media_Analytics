@@ -1,4 +1,5 @@
 # Social_Media_Analytics
+
 SQL Project
 
 ------------------------------------------------------------------------------
@@ -47,8 +48,10 @@ country           : Geographical country location linked to the user profile.
 ```
 
 ------------------------------------------------------------------------------
+
 Table: dim_post  
 Purpose: Stores metadata, media attributes, and structural characteristics of published content.
+
 ------------------------------------------------------------------------------
 ```text
 Columns:
@@ -61,8 +64,10 @@ has_audio         : Indicator showing whether the post contains an active audio 
 ```
 
 ------------------------------------------------------------------------------
+
 Table: dim_hashtag  
 Purpose: Stores unique hashtags and tags used across content on the platform.
+
 ------------------------------------------------------------------------------
 ```text
 Columns:
@@ -142,7 +147,7 @@ DIMENSION TABLES (The Context)
 
 ------------------------------------------------------------------------------
 
--- Calendar Dimension
+Calendar Dimension
 ```sql
 CREATE TABLE dim_date (
     date_key INT PRIMARY KEY, -- Format: YYYYMMDD (e.g., 20231025)
@@ -158,7 +163,7 @@ CREATE TABLE dim_date (
 );
 ```
 
--- User Dimension
+User Dimension
 ```sql
 CREATE TABLE dim_user (
     user_key INT AUTO_INCREMENT PRIMARY KEY, -- Surrogate Key
@@ -170,7 +175,7 @@ CREATE TABLE dim_user (
 );
 ```
 
--- Post Dimension
+Post Dimension
 ```sql
 CREATE TABLE dim_post (
     post_key INT AUTO_INCREMENT PRIMARY KEY, -- Surrogate Key
@@ -182,7 +187,7 @@ CREATE TABLE dim_post (
 );
 ```
 
--- Hashtag Dimension
+Hashtag Dimension
 ```sql
 CREATE TABLE dim_hashtag (
     hashtag_key INT AUTO_INCREMENT PRIMARY KEY, -- Surrogate Key
@@ -197,7 +202,7 @@ FACT TABLES (The Events & Metrics)
 
 ------------------------------------------------------------------------------
 
--- Post Creation Fact (Connects Author to Post)
+Post Creation Fact (Connects Author to Post)
 ```sql
 CREATE TABLE fact_post_creation (
     author_user_key INT,
@@ -210,7 +215,7 @@ CREATE TABLE fact_post_creation (
 );
 ```
 
--- Engagement Fact (Likes, Comments, Shares)
+Engagement Fact (Likes, Comments, Shares)
 ```sql
 CREATE TABLE fact_engagement (
     actor_user_key INT,
@@ -224,7 +229,7 @@ CREATE TABLE fact_engagement (
 );
 ```
 
--- Follower Network Fact (Followers & Following)
+Follower Network Fact (Followers & Following)
 ```
 CREATE TABLE fact_network (
     follower_user_key INT,
@@ -238,7 +243,7 @@ CREATE TABLE fact_network (
 );
 ```
 
--- Hashtag Usage Fact (Bridge Fact for Posts and Hashtags)
+Hashtag Usage Fact (Bridge Fact for Posts and Hashtags)
 ```sql
 CREATE TABLE fact_hashtag_usage (
     post_key INT,
@@ -261,7 +266,7 @@ DIMENSION TABLES
 
 ------------------------------------------------------------------------------
 
--- Calendar Dimension
+Calendar Dimension
 ```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/dim_date.csv'
 INTO TABLE dim_date
@@ -285,7 +290,7 @@ SET
     is_weekend = IF(LOWER(@is_weekend_var) IN ('true', '1'), 1, 0);
 ```
 
--- User Dimension
+User Dimension
 ```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/dim_user.csv'
 INTO TABLE dim_user
@@ -304,7 +309,7 @@ SET
     is_verified = IF(LOWER(@is_verified_var) IN ('true', '1'), 1, 0);
 ```
 
--- Post Dimension
+Post Dimension
 ```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/dim_post.csv'
 INTO TABLE dim_post
@@ -323,7 +328,7 @@ SET
     has_audio = IF(LOWER(@has_audio_var) IN ('true', '1'), 1, 0);
 ```
 
--- Hashtag Dimension
+Hashtag Dimension
 ```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/dim_hashtag.csv'
 INTO TABLE dim_hashtag
@@ -344,7 +349,7 @@ FACT TABLES
 
 ------------------------------------------------------------------------------
 
--- Post Creation Fact
+Post Creation Fact
 ```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/fact_post_creation.csv'
 INTO TABLE fact_post_creation
@@ -359,7 +364,7 @@ IGNORE 1 LINES
 );
 ```
 
--- Engagement Fact
+Engagement Fact
 ```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/fact_engagement.csv'
 INTO TABLE fact_engagement
@@ -375,7 +380,7 @@ IGNORE 1 LINES
 );
 ```
 
--- Follower Network Fact
+Follower Network Fact
 ```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/fact_network.csv'
 INTO TABLE fact_network
@@ -391,7 +396,7 @@ IGNORE 1 LINES
 );
 ```
 
--- Hashtag Usage Fact
+Hashtag Usage Fact
 ```sql
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/SocialMediaAnalytics/fact_hashtag_usage.csv'
 INTO TABLE fact_hashtag_usage
@@ -420,15 +425,14 @@ Note: All user-level references use the non-identifying surrogate key (user_id) 
 
 ------------------------------------------------------------------------------
 
-------------------------------------------------------------------------------
-
 CONTENT AND PUBLISHING PERFORMANCE
 
-------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+
+QUESTION 1
 
 -----------------------------------------------------------------------------
-QUESTION 1
------------------------------------------------------------------------------
+
 INFO:
 Content format strategy heavily dictates resource allocation. 
 Decision-makers need to understand which content formats are being published most frequently and the current adoption rate of audio-enhanced content.
@@ -450,6 +454,7 @@ ORDER BY total_posts_published DESC;
 ```
 
 INSIGHTS:
+
 ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: STATIC & CAROUSEL AUDIO ADOPTION IS STALLED AT ~50%
 --    Observation: Images (40.77%, n=2,446) and carousels (20.10%, n=1,206)
@@ -476,8 +481,11 @@ INSIGHTS:
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 2
+
 -----------------------------------------------------------------------------
+
 INFO:
 Understanding content velocity over time helps marketing and operational teams anticipate peak platform activity and plan strategic campaigns.
 
@@ -520,7 +528,8 @@ ORDER BY
     calendar_month;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: MID-YEAR PUBLISHING VELOCITY PEAK (Q2/Q3)
 --    Observation: Content creation swells during Q2 (n=1,518; 25.30%) and Q3 
@@ -554,8 +563,11 @@ ORDER BY
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 3
+
 -----------------------------------------------------------------------------
+
 INFO:
 Scheduling and automated publishing tools depend on knowing when users are historically most active in generating content.
 
@@ -585,7 +597,8 @@ FROM day_type_summary
 ORDER BY avg_posts_per_day DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: EQUIVALENT DAILY PUBLISHING VELOCITY ACROSS ALL DAYS
 --    Observation: Daily content output is virtually identical between Weekdays 
@@ -612,8 +625,11 @@ ORDER BY avg_posts_per_day DESC;
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 4
+
 -----------------------------------------------------------------------------
+
 INFO:
 Copywriting efforts vary widely by content format. Understanding baseline caption behavior helps establish best practices for content creators.
 
@@ -632,7 +648,8 @@ GROUP BY post_type
 ORDER BY avg_caption_length DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: UNIFORM CAPTION BEHAVIOR & SHORT-FORM TEXT LEADERSHIP
 --    Observation: Average caption lengths are remarkably uniform across all formats 
@@ -657,14 +674,16 @@ ORDER BY avg_caption_length DESC;
 --                    short captions into search-optimized copy.
 -- ---------------------------------------------------------------------------
 
+-----------------------------------------------------------------------------
 
-=============================================================================
 ENGAGEMENT AND AUDIENCE BEHAVIOR
-=============================================================================
 
 -----------------------------------------------------------------------------
+
 QUESTION 5
+
 -----------------------------------------------------------------------------
+
 INFO:
 Not all published content drives equivalent engagement. Identifying the formats that yield the highest return on interaction informs future content production investments.
 
@@ -700,7 +719,8 @@ FROM format_engagement
 ORDER BY avg_engagement_per_post DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: UNIFORM FORMAT PERFORMANCE WITH SLIGHT VIDEO OUTPERFORMANCE
 --    Observation: Average engagement per post remains tightly clustered across all 
@@ -735,13 +755,16 @@ ORDER BY avg_engagement_per_post DESC;
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 6
+
 -----------------------------------------------------------------------------
+
 INFO:
 Recognizing highly active unverified users ("super-fans" or emerging creators) is essential for community management, ambassadorship programs, and retention.
  
- QUESTION:
- Who are the top 10 most actively engaging non-verified users on the platform based on total interaction volume?
+QUESTION:
+Who are the top 10 most actively engaging non-verified users on the platform based on total interaction volume?
 
 QUERY:
 ```sql
@@ -775,7 +798,8 @@ FROM top_unverified_users
 ORDER BY total_interactions_made DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: PERSONAL ACCOUNTS DRIVE TOP OUTGOING INTERACTION VOLUME
 --    Observation: 70% of the top 10 most active non-verified users (n=7) hold 
@@ -811,8 +835,11 @@ ORDER BY total_interactions_made DESC;
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 7
+
 -----------------------------------------------------------------------------
+
 INFO:
 Audio integration can shift how users interact with content (e.g., more passive viewing vs. active commenting).
 
@@ -842,7 +869,8 @@ FROM interaction_breakdown
 ORDER BY audio_status, interaction_volume DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: AUDIO CONTENT DRIVES ENGAGEMENT VOLUME SUPERIORITY
 --    Observation: Content with audio generates 69.18% of total platform interactions 
@@ -872,8 +900,11 @@ ORDER BY audio_status, interaction_volume DESC;
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 8
+
 -----------------------------------------------------------------------------
+
 INFO:
 Spikes in daily engagement dictate when community managers should be most active and when infrastructure loads are heaviest.
 
@@ -898,7 +929,8 @@ HAVING SUM(e.interaction_count) / COUNT(DISTINCT d.date_key) > (
 ORDER BY avg_daily_volume DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: MID-WEEK TO FRIDAY ENGAGEMENT PEAK (TUE-FRI), LED BY TUESDAY
 --    Observation: Only four days—Tuesday (42/day, the platform-wide maximum; 
@@ -926,13 +958,16 @@ ORDER BY avg_daily_volume DESC;
 -- ---------------------------------------------------------------------------
 
 
-=============================================================================
+-----------------------------------------------------------------------------
+
 USER, ACCOUNT, AND NETWORK GROWTH
-=============================================================================
 
 -----------------------------------------------------------------------------
+
 QUESTION 9
+
 -----------------------------------------------------------------------------
+
 INFO:
 The follower-to-following ratio is a primary indicator of account influence and audience dynamic. Variations across account types highlight differing platform usage strategies.
 
@@ -972,7 +1007,7 @@ FROM followers_by_type
 ORDER BY follower_to_following_ratio DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: BUSINESS ACCOUNTS LEAD AS NET NETWORK INFLUENCERS
 --    Observation: Business accounts generate the highest aggregate ratio at 1.07 
@@ -1005,13 +1040,16 @@ ORDER BY follower_to_following_ratio DESC;
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 10
+
 -----------------------------------------------------------------------------
+
 INFO:
 Regional platform health requires a balance between content creation and consumption. Markets with high engagement but low creation may represent strategic expansion opportunities.
  
- QUESTION:
- How does the ratio of user engagement to content creation vary across different geographic regions (countries)?
+QUESTION:
+How does the ratio of user engagement to content creation vary across different geographic regions (countries)?
 
 QUERY:
 ```sql
@@ -1038,7 +1076,8 @@ GROUP BY u.country
 ORDER BY engagement_to_creation_ratio DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: EXTREME CONSUMPTION OUTLIERS DRIVEN BY SMALL-MARKET USERS
 --    Observation: Honduras leads global engagement-to-creation density with a 10.00 
@@ -1076,8 +1115,11 @@ ORDER BY engagement_to_creation_ratio DESC;
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 11
+
 -----------------------------------------------------------------------------
+
 INFO:
 Verification badges are intended to signal trust. Measuring whether verified accounts actually experience lower audience churn validates this assumption.
 
@@ -1117,7 +1159,8 @@ FROM verification_summary
 ORDER BY avg_active_followers_per_account DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: VERIFIED BADGES DRIVE AUDIENCE SCALE & ACQUISITION LEVERAGE
 --    Observation: Verified accounts command 1,203 active followers per profile 
@@ -1146,8 +1189,11 @@ ORDER BY avg_active_followers_per_account DESC;
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 12
+
 -----------------------------------------------------------------------------
+
 INFO:
 Overall network health is measured by the continuous addition of net-new social connections. Tracking this sequentially alerts leadership to accelerating growth or structural plateaus.
 
@@ -1188,7 +1234,8 @@ ORDER BY
     curr.calendar_month;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: MID-YEAR SURGE & HIGH-VOLUME EXPANSION (MAY & AUGUST)
 --    Observation: Network expansion peaks during May (n=366 net connections; +8.28% MoM) 
@@ -1222,14 +1269,16 @@ ORDER BY
 --                 forecasts.
 -- ---------------------------------------------------------------------------
 
+-----------------------------------------------------------------------------
 
-=============================================================================
 HASHTAG, TREND, AND STRATEGIC GROWTH OPPORTUNITIES
-=============================================================================
 
 -----------------------------------------------------------------------------
+
 QUESTION 13
+
 -----------------------------------------------------------------------------
+
 INFO:
 High-volume usage doesn't always guarantee high engagement. Identifying tags that punch above their weight class provides actionable recommendations for content optimization.
 
@@ -1271,7 +1320,8 @@ ORDER BY platform_engagement_rank
 LIMIT 15;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: TOP QUARTILE HASHTAG EFFICIENCY CLUSTERS TIGHTLY NEAR 1.00
 --    Observation: The top 15 most-used hashtags (Quartile 1) maintain an extremely 
@@ -1301,8 +1351,11 @@ LIMIT 15;
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 14
+
 -----------------------------------------------------------------------------
+
 INFO:
 Daily fluctuations can hide macro-trends. Applying a rolling average smooths out the noise, making true engagement momentum and viral spikes clearly visible.
 
@@ -1358,7 +1411,8 @@ FROM trailing_30d_sample
 ORDER BY full_date DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: STABLE BASELINE MONOTONY WITH LOW VOLATILITY
 --    Observation: Over 93.5% of the December trailing sample (29 out of 31 days) 
@@ -1396,8 +1450,11 @@ ORDER BY full_date DESC;
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 15
+
 -----------------------------------------------------------------------------
+
 INFO:
 Sponsoring massive accounts is expensive. Finding "breakout creators" who command massive engagement relative to their small follower counts highlights underpriced partnership opportunities.
 
@@ -1460,7 +1517,8 @@ FROM breakout_creators
 ORDER BY interaction_to_follower_multiplier DESC;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: PERSONAL PROFILES DOMINATE BREAKOUT EFFICIENCY
 --    Observation: 80% of the qualifying breakout creators (n=12 out of 15) hold 
@@ -1497,8 +1555,11 @@ ORDER BY interaction_to_follower_multiplier DESC;
 -- ---------------------------------------------------------------------------
 
 -----------------------------------------------------------------------------
+
 QUESTION 16
+
 -----------------------------------------------------------------------------
+
 INFO:
 A tag may be popular overall, but its relevance could be fading. Tracking the cumulative buildup and monthly velocity of top tags reveals strategic lifecycles.
 
@@ -1569,7 +1630,8 @@ ORDER BY
     htm.calendar_month;
 ```
 
--- INSIGHTS:
+INSIGHTS:
+
 -- ---------------------------------------------------------------------------
 -- 1. EXECUTIVE FINDING: LATE-YEAR DECELERATION & PLATEAU ACROSS TOP-TIER HASHTAGS
 --    Observation: By December 2023, four out of the top 5 trending hashtags (#agree, 
