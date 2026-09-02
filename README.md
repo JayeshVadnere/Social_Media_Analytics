@@ -144,7 +144,7 @@ SOCIAL MEDIA ANALYTICS SCHEMA (MYSQL VERSION)
 ------------------------------------------------------------------------------
 
 ```sql
-CREATE DATABASE social_media
+CREATE DATABASE social_media;
 ```
 
 ------------------------------------------------------------------------------
